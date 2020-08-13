@@ -5,4 +5,4 @@ class UserProfileConfig(AppConfig):
     name = 'UserProfile'
 
     def ready(self):
-        from .signals import train_image
+        from .signals import schedule_image_encoding
