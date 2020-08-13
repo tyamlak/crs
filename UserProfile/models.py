@@ -14,13 +14,19 @@ class PhoneNumber(models.Model):
     work = models.CharField(max_length=25,blank=True)
     neighbor = models.CharField(max_length=25,blank=True)
 
+    def __str__(self):
+        return f'{self.mobile}'
+
 class Residence(models.Model):
     house_number = models.PositiveIntegerField()
     kebele = models.PositiveIntegerField()
     subcity = models.CharField(max_length=100)
-    former_house_number = models.PositiveIntegerField()
-    former_kebele = models.PositiveIntegerField()
-    former_wereda = models.PositiveIntegerField()
+    former_house_number = models.PositiveIntegerField(default=0)
+    former_kebele = models.PositiveIntegerField(default=0)
+    former_wereda = models.PositiveIntegerField(default=0)
+
+    def __str__(self):
+        return f'{self.subcity} Kebele {self.kebele} H.NO {self.house_number}'
 
 class Person(models.Model):
     first_name = models.CharField(max_length=50)
@@ -38,23 +44,31 @@ class Person(models.Model):
     work = models.OneToOneField(Work,on_delete=models.CASCADE)
     living_address = models.OneToOneField(Residence,on_delete=models.CASCADE) 
 
+    def __str__(self):
+        return f'{self.first_name} {self.middle_name} {self.last_name}'
+
 class Criminal(models.Model):
     profile = models.OneToOneField(Person,primary_key=True,on_delete=models.CASCADE)
     is_guilty = models.BooleanField(default=False)
     testimony = models.TextField(blank=True)
 
+    def __str__(self):
+        return self.profile.first_name
+
+    @property
+    def get_pk(self):
+        return self.profile.pk
+
 class CriminalImage(models.Model):
     
     def upload_location(self,file_name):
-        return f'{file_name}'
+        return f'criminal-id-{self.criminal.get_pk}/images/{file_name}'
     criminal = models.ForeignKey(Criminal,on_delete=models.CASCADE,related_name='images')
     image = models.FileField(upload_to=upload_location) # change to Image field with pillow
 
 class ImageEncoding(models.Model):
 
-    def upload_location(self,file_name):
-        return f'{file_name}'
-    encoding = models.FileField(upload_to=upload_location)
+    encoding = models.BinaryField(blank=False)
     criminal = models.ForeignKey(Criminal,on_delete=models.CASCADE)
 
 class Plaintiff(models.Model):
