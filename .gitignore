@@ -1,5 +1,8 @@
 db.sqlite3
 __pycache__/
 */migrations/
+/case/files/*
 init_db.py
 To-Do.txt
+.vscode
+rm_migrations.ps1

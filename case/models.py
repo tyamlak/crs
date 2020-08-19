@@ -1,5 +1,6 @@
 from django.db import models
 from UserProfile.models import Police, Criminal, Plaintiff, Witness
+from datetime import datetime
 
 
 class Case(models.Model):
@@ -26,3 +27,6 @@ class ActivityLog(models.Model):
 
     logged_at = models.DateTimeField(auto_now_add=True)
     description = models.TextField(blank=False)
+
+    def __str__(self):
+        return 'Took place on ' + datetime.strftime(self.logged_at,'%X %d/%m/%Y')
