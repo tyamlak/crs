@@ -1,0 +1,30 @@
+<div class="card-header">
+    <a class="card-link" data-toggle="collapse" href="#witness_form">
+        <h5>Witness Form</h5>
+    </a>
+</div>
+<div id="witness_form" class="collapse" data-parent="#accordion">
+    <div class="card-body">
+        <div class="row">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    {{ person }}
+                </div>
+                <div class="form-group">
+                    {{ image_form }}
+                </div>
+                <div class="form-group">
+                    {{ phone }}
+                </div>
+                <div class="form-group">
+                    {{ residence }}
+                </div>
+                <div class="form-group">
+                    {{ work }}
+                </div>
+                <button type="submit" class="btn btn-primary" >Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
