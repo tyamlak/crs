@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'case.apps.CaseConfig',
     'background_task',
     'crispy_forms',
+    'rest_framework',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
