@@ -1,12 +1,490 @@
-{% extends "base.html" %}
-{% load static %}
-{% block title %}
-	Create new case
-{% endblock %}
-{% block content %}
-<h1> Collapsable Buttons</h1>
-    {% include "case/criminal_form.html" %}
-    <h2>Add Witness Form</h2>
-    <h2>Add Plaintiff Form</h2>
-    <h2>Assigned Polices</h2>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criminal Record System</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="../css/styles.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top">
+            <!-- Brand -->
+            <a class="navbar-brand" href="../index.html">CRS</a>
+
+            <!-- Toggler/collapsibe Button -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Home</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link " href="#">Add New Case</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container-fluid" style="margin:80px 0px">
+        <div id="accordion">
+
+            <div class="card">
+                <div class="card-header" data-toggle="collapse" href="#collapseOne">
+                    <a class="card-link" data-toggle="collapse" href="#collapseOne">
+                        Criminal Form
+                    </a>
+                </div>
+                <div id="collapseOne" class="collapse show" data-parent="#accordion">
+                    <div class="card-body">
+                        <div class="form-row">
+                            <form method="POST" enctype="multipart/form-data">
+                                <div class="row ml-2">
+                                    <div class="form-group card text-center col-3" id="upload-photo"
+                                        style="width:12rem;height: 12rem;">
+                                        <label for="photo-file" class="card-title">
+                                            <div class="card-img-overlay" style="cursor: pointer;">
+                                                <h5>Add Photos</h5>
+                                                <img style="width:3rem;"
+                                                    src="../images/1x/baseline_add_a_photo_black_48dp.png"
+                                                    alt="Card image" class="card-img-top">
+                                                <input type="file" multiple style="display: none;" name="photo"
+                                                    id="photo-file">
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col-9">
+                                        <div class="row">
+                                            <div class="col">
+                                                <label for="fname">First Name</label>
+                                                <input type="text" class="form-control" id="fname">
+                                            </div>
+                                            <div class="col">
+                                                <label for="mname">Middle Name</label>
+                                                <input type="text" class="form-control" id="mname">
+                                            </div>
+                                            <div class="col">
+                                                <label for="lname">Last Name</label>
+                                                <input type="text" class="form-control" id="lname">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label for="sex">Sex</label>
+                                                <select name="sex" id="inputState" class="form-control">
+                                                    <option></option>
+                                                    <option>Male</option>
+                                                    <option>Female</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="age">Age</label>
+                                                <input type="number" min="0" class="form-control" id="age">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label for="date_of_birth">Date of birth</label>
+                                                <input type="date" class="form-control" id="date_of_birth">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="place_of_birth">Place of birth</label>
+                                                <input type="text" class="form-control" id="place_of_birth">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <label for="nationality">Nationality</label>
+                                                <input type="text" class="form-control" id="nationality">
+                                            </div>
+                                            <div class="col">
+                                                <label for="ethnicity">Ethnicity</label>
+                                                <input type="text" class="form-control" id="ethnicity">
+                                            </div>
+                                            <div class="col">
+                                                <label for="religion">Religion</label>
+                                                <input type="text" class="form-control" id="religion">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-md-6">
+                                                <label for="income">Income</label>
+                                                <input type="number" min="0" class="form-control" id="income">
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="mobile">Mobile</label>
+                                                <input type="tel" class="form-control" id="mobile">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col">
+                                                <label for="house_no">House number</label>
+                                                <input type="number" min="0" class="form-control" id="house_no">
+                                            </div>
+                                            <div class="form-group col">
+                                                <label for="kebele">Kebele</label>
+                                                <input type="number" min="0" class="form-control" id="kebele">
+                                            </div>
+                                            <div class="form-group col">
+                                                <label for="subcity">Subcity</label>
+                                                <input type="text" class="form-control" id="subcity">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col">
+                                                <label for="former_house_no">Former house number</label>
+                                                <input type="number" min="0" class="form-control" id="former_house_no">
+                                            </div>
+                                            <div class="form-group col">
+                                                <label for="former_kebele">Former Kebele</label>
+                                                <input type="number" min="0" class="form-control" id="former_kebele">
+                                            </div>
+                                            <div class="form-group col">
+                                                <label for="former_wereda">Former Wereda</label>
+                                                <input type="number" min="0" class="form-control" id="former_wereda">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col">
+                                                <label for="salary">Salary</label>
+                                                <input type="number" min="0" class="form-control" id="salary">
+                                            </div>
+                                            <div class="form-group col">
+                                                <label for="kebele">Role</label>
+                                                <input type="text" class="form-control" id="kebele">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col">
+                                                <label for="work">Work type</label>
+                                                <input type="text" class="form-control" id="work">
+                                            </div>
+                                            <div class="form-group col">
+                                                <label for="address">Address</label>
+                                                <input type="text" class="form-control" id="address">
+                                            </div>
+                                        </div>
+                                        <button class="mx-auto btn btn-primary mt-3" style="width: 200px;">Submit</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header" data-toggle="collapse" href="#collapseTwo">
+                    <a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">
+                        Witness Form
+                    </a>
+                </div>
+                <div id="collapseTwo" class="collapse" data-parent="#accordion">
+                    <div class="card-body">
+                        <div class="form-row">
+                            <form method="POST" enctype="multipart/form-data">
+                                <div class="row ml-2">
+                                    <div class="form-group card text-center col-3" id="upload-photo"
+                                        style="width:12rem;height: 12rem;">
+                                        <label for="photo-file" class="card-title">
+                                            <div class="card-img-overlay" style="cursor: pointer;">
+                                                <h5>Add Photos</h5>
+                                                <img style="width:3rem;"
+                                                    src="../images/1x/baseline_add_a_photo_black_48dp.png"
+                                                    alt="Card image" class="card-img-top">
+                                                <input type="file" multiple style="display: none;" name="photo"
+                                                    id="photo-file">
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col-9">
+                                        <div class="row">
+                                            <div class="col">
+                                                <label for="fname">First Name</label>
+                                                <input type="text" class="form-control" id="fname">
+                                            </div>
+                                            <div class="col">
+                                                <label for="mname">Middle Name</label>
+                                                <input type="text" class="form-control" id="mname">
+                                            </div>
+                                            <div class="col">
+                                                <label for="lname">Last Name</label>
+                                                <input type="text" class="form-control" id="lname">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label for="sex">Sex</label>
+                                                <select name="sex" id="inputState" class="form-control">
+                                                    <option></option>
+                                                    <option>Male</option>
+                                                    <option>Female</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="age">Age</label>
+                                                <input type="number" min="0" class="form-control" id="age">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label for="date_of_birth">Date of birth</label>
+                                                <input type="date" class="form-control" id="date_of_birth">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="place_of_birth">Place of birth</label>
+                                                <input type="text" class="form-control" id="place_of_birth">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <label for="nationality">Nationality</label>
+                                                <input type="text" class="form-control" id="nationality">
+                                            </div>
+                                            <div class="col">
+                                                <label for="ethnicity">Ethnicity</label>
+                                                <input type="text" class="form-control" id="ethnicity">
+                                            </div>
+                                            <div class="col">
+                                                <label for="religion">Religion</label>
+                                                <input type="text" class="form-control" id="religion">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-md-6">
+                                                <label for="income">Income</label>
+                                                <input type="number" min="0" class="form-control" id="income">
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="mobile">Mobile</label>
+                                                <input type="tel" class="form-control" id="mobile">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col">
+                                                <label for="house_no">House number</label>
+                                                <input type="number" min="0" class="form-control" id="house_no">
+                                            </div>
+                                            <div class="form-group col">
+                                                <label for="kebele">Kebele</label>
+                                                <input type="number" min="0" class="form-control" id="kebele">
+                                            </div>
+                                            <div class="form-group col">
+                                                <label for="subcity">Subcity</label>
+                                                <input type="text" class="form-control" id="subcity">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col">
+                                                <label for="former_house_no">Former house number</label>
+                                                <input type="number" min="0" class="form-control" id="former_house_no">
+                                            </div>
+                                            <div class="form-group col">
+                                                <label for="former_kebele">Former Kebele</label>
+                                                <input type="number" min="0" class="form-control" id="former_kebele">
+                                            </div>
+                                            <div class="form-group col">
+                                                <label for="former_wereda">Former Wereda</label>
+                                                <input type="number" min="0" class="form-control" id="former_wereda">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col">
+                                                <label for="salary">Salary</label>
+                                                <input type="number" min="0" class="form-control" id="salary">
+                                            </div>
+                                            <div class="form-group col">
+                                                <label for="kebele">Role</label>
+                                                <input type="text" class="form-control" id="kebele">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col">
+                                                <label for="work">Work type</label>
+                                                <input type="text" class="form-control" id="work">
+                                            </div>
+                                            <div class="form-group col">
+                                                <label for="address">Address</label>
+                                                <input type="text" class="form-control" id="address">
+                                            </div>
+                                        </div>
+
+                                        <button class="mx-auto btn btn-primary mt-3" style="width: 200px;">Submit</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header" data-toggle="collapse" href="#collapseThree">
+                    <a class="collapsed card-link" data-toggle="collapse" href="#collapseThree">
+                        Plaintiff Form
+                    </a>
+                </div>
+                <div id="collapseThree" class="collapse" data-parent="#accordion">
+                    <div class="card-body">
+                        <div class="form-row">
+                            <form method="POST" enctype="multipart/form-data">
+                                <div class="row ml-2">
+                                    <div class="form-group card text-center col-3" id="upload-photo"
+                                        style="width:12rem;height: 12rem;">
+                                        <label for="photo-file" class="card-title">
+                                            <div class="card-img-overlay" style="cursor: pointer;">
+                                                <h5>Add Photos</h5>
+                                                <img style="width:3rem;"
+                                                    src="../images/1x/baseline_add_a_photo_black_48dp.png"
+                                                    alt="Card image" class="card-img-top">
+                                                <input type="file" multiple style="display: none;" name="photo"
+                                                    id="photo-file">
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col-9">
+                                        <div class="row">
+                                            <div class="col">
+                                                <label for="fname">First Name</label>
+                                                <input type="text" class="form-control" id="fname">
+                                            </div>
+                                            <div class="col">
+                                                <label for="mname">Middle Name</label>
+                                                <input type="text" class="form-control" id="mname">
+                                            </div>
+                                            <div class="col">
+                                                <label for="lname">Last Name</label>
+                                                <input type="text" class="form-control" id="lname">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label for="sex">Sex</label>
+                                                <select name="sex" id="inputState" class="form-control">
+                                                    <option></option>
+                                                    <option>Male</option>
+                                                    <option>Female</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="age">Age</label>
+                                                <input type="number" min="0" class="form-control" id="age">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label for="date_of_birth">Date of birth</label>
+                                                <input type="date" class="form-control" id="date_of_birth">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="place_of_birth">Place of birth</label>
+                                                <input type="text" class="form-control" id="place_of_birth">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <label for="nationality">Nationality</label>
+                                                <input type="text" class="form-control" id="nationality">
+                                            </div>
+                                            <div class="col">
+                                                <label for="ethnicity">Ethnicity</label>
+                                                <input type="text" class="form-control" id="ethnicity">
+                                            </div>
+                                            <div class="col">
+                                                <label for="religion">Religion</label>
+                                                <input type="text" class="form-control" id="religion">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-md-6">
+                                                <label for="income">Income</label>
+                                                <input type="number" min="0" class="form-control" id="income">
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="mobile">Mobile</label>
+                                                <input type="tel" class="form-control" id="mobile">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col">
+                                                <label for="house_no">House number</label>
+                                                <input type="number" min="0" class="form-control" id="house_no">
+                                            </div>
+                                            <div class="form-group col">
+                                                <label for="kebele">Kebele</label>
+                                                <input type="number" min="0" class="form-control" id="kebele">
+                                            </div>
+                                            <div class="form-group col">
+                                                <label for="subcity">Subcity</label>
+                                                <input type="text" class="form-control" id="subcity">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col">
+                                                <label for="former_house_no">Former house number</label>
+                                                <input type="number" min="0" class="form-control" id="former_house_no">
+                                            </div>
+                                            <div class="form-group col">
+                                                <label for="former_kebele">Former Kebele</label>
+                                                <input type="number" min="0" class="form-control" id="former_kebele">
+                                            </div>
+                                            <div class="form-group col">
+                                                <label for="former_wereda">Former Wereda</label>
+                                                <input type="number" min="0" class="form-control" id="former_wereda">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col">
+                                                <label for="salary">Salary</label>
+                                                <input type="number" min="0" class="form-control" id="salary">
+                                            </div>
+                                            <div class="form-group col">
+                                                <label for="kebele">Role</label>
+                                                <input type="text" class="form-control" id="kebele">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col">
+                                                <label for="work">Work type</label>
+                                                <input type="text" class="form-control" id="work">
+                                            </div>
+                                            <div class="form-group col">
+                                                <label for="address">Address</label>
+                                                <input type="text" class="form-control" id="address">
+                                            </div>
+                                        </div>
+
+                                        <button class="mx-auto btn btn-primary mt-3" style="width: 200px;">Submit</button>
+                                    </div>
+                                </div>
+                                
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <footer class="container-fluid text-center " style="background:black;height:50px;padding-top:15px;color:white">
+        &copy; 2020 Criminal Recording System.
+    </footer>
+    <script src="../js/jquery-2.1.4.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+</body>
+
+</html>
