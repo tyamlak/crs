@@ -22,14 +22,14 @@ Add new case
                             <div class="row ml-2">
                                 <div class="form-group card text-center col-3" id="upload-photo"
                                     style="width:12rem;height: 12rem;">
-                                    <label for="photo-file" class="card-title">
+                                    <label for="C_photo-file" class="card-title">
                                         <div class="card-img-overlay" style="cursor: pointer;">
-                                            <h5>Add Photos</h5>
-                                            <img style="width:3rem;"
+                                            <h5 id="photo_text">Add Photos</h5>
+                                            <img id="photo" style="width:3rem;"
                                                 src="{% static "images/camera.png" %}" alt="Card image"
                                                 class="card-img-top">
                                             <input type="file" multiple style="display: none;" name="photo"
-                                                id="photo-file">
+                                                id="C_photo-file">
                                         </div>
                                     </label>
                                 </div>
@@ -37,21 +37,21 @@ Add new case
                                     <div class="row">
                                         <div class="col">
                                             <label for="fname">First Name</label>
-                                            <input type="text" class="form-control" id="fname">
+                                            <input type="text" class="form-control" id="C_fname">
                                         </div>
                                         <div class="col">
                                             <label for="mname">Middle Name</label>
-                                            <input type="text" class="form-control" id="mname">
+                                            <input type="text" class="form-control" id="C_mname">
                                         </div>
                                         <div class="col">
                                             <label for="lname">Last Name</label>
-                                            <input type="text" class="form-control" id="lname">
+                                            <input type="text" class="form-control" id="C_lname">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <label for="sex">Sex</label>
-                                            <select name="sex" id="inputState" class="form-control">
+                                            <select name="sex" id="C_sex" class="form-control">
                                                 <option></option>
                                                 <option>Male</option>
                                                 <option>Female</option>
@@ -59,92 +59,92 @@ Add new case
                                         </div>
                                         <div class="col-md-6">
                                             <label for="age">Age</label>
-                                            <input type="number" min="0" class="form-control" id="age">
+                                            <input type="number" min="0" class="form-control" id="C_age">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <label for="date_of_birth">Date of birth</label>
-                                            <input type="date" class="form-control" id="date_of_birth">
+                                            <input type="date" class="form-control" id="C_date_of_birth">
                                         </div>
                                         <div class="col-md-6">
                                             <label for="place_of_birth">Place of birth</label>
-                                            <input type="text" class="form-control" id="place_of_birth">
+                                            <input type="text" class="form-control" id="C_place_of_birth">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col">
                                             <label for="nationality">Nationality</label>
-                                            <input type="text" class="form-control" id="nationality">
+                                            <input type="text" class="form-control" id="C_nationality">
                                         </div>
                                         <div class="col">
                                             <label for="ethnicity">Ethnicity</label>
-                                            <input type="text" class="form-control" id="ethnicity">
+                                            <input type="text" class="form-control" id="C_ethnicity">
                                         </div>
                                         <div class="col">
                                             <label for="religion">Religion</label>
-                                            <input type="text" class="form-control" id="religion">
+                                            <input type="text" class="form-control" id="C_religion">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group col-md-6">
                                             <label for="income">Income</label>
-                                            <input type="number" min="0" class="form-control" id="income">
+                                            <input type="number" min="0" class="form-control" id="C_income">
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="mobile">Mobile</label>
-                                            <input type="tel" class="form-control" id="mobile">
+                                            <input type="tel" class="form-control" id="C_mobile">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group col">
                                             <label for="house_no">House number</label>
-                                            <input type="number" min="0" class="form-control" id="house_no">
+                                            <input type="number" min="0" class="form-control" id="C_house_no">
                                         </div>
                                         <div class="form-group col">
                                             <label for="kebele">Kebele</label>
-                                            <input type="number" min="0" class="form-control" id="kebele">
+                                            <input type="number" min="0" class="form-control" id="C_kebele">
                                         </div>
                                         <div class="form-group col">
                                             <label for="subcity">Subcity</label>
-                                            <input type="text" class="form-control" id="subcity">
+                                            <input type="text" class="form-control" id="C_subcity">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group col">
                                             <label for="former_house_no">Former house number</label>
-                                            <input type="number" min="0" class="form-control" id="former_house_no">
+                                            <input type="number" min="0" class="form-control" id="C_former_house_no">
                                         </div>
                                         <div class="form-group col">
                                             <label for="former_kebele">Former Kebele</label>
-                                            <input type="number" min="0" class="form-control" id="former_kebele">
+                                            <input type="number" min="0" class="form-control" id="C_former_kebele">
                                         </div>
                                         <div class="form-group col">
                                             <label for="former_wereda">Former Wereda</label>
-                                            <input type="number" min="0" class="form-control" id="former_wereda">
+                                            <input type="number" min="0" class="form-control" id="C_former_wereda">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group col">
                                             <label for="salary">Salary</label>
-                                            <input type="number" min="0" class="form-control" id="salary">
+                                            <input type="number" min="0" class="form-control" id="C_salary">
                                         </div>
                                         <div class="form-group col">
-                                            <label for="kebele">Role</label>
-                                            <input type="text" class="form-control" id="kebele">
+                                            <label for="role">Role</label>
+                                            <input type="text" class="form-control" id="C_role">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group col">
                                             <label for="work">Work type</label>
-                                            <input type="text" class="form-control" id="work">
+                                            <input type="text" class="form-control" id="C_work">
                                         </div>
                                         <div class="form-group col">
                                             <label for="address">Address</label>
-                                            <input type="text" class="form-control" id="address">
+                                            <input type="text" class="form-control" id="C_address">
                                         </div>
                                     </div>
-                                    <button class="mx-auto btn btn-primary mt-3" style="width: 200px;">Submit</button>
+                                    <button class="mx-auto btn btn-primary mt-3" id="submit_btn" style="width: 200px;">Submit</button>
                                 </div>
                             </div>
                         </form>
@@ -166,14 +166,14 @@ Add new case
                             <div class="row ml-2">
                                 <div class="form-group card text-center col-3" id="upload-photo"
                                     style="width:12rem;height: 12rem;">
-                                    <label for="photo-file" class="card-title">
+                                    <label for="W_photo-file" class="card-title">
                                         <div class="card-img-overlay" style="cursor: pointer;">
-                                            <h5>Add Photos</h5>
-                                            <img style="width:3rem;"
+                                            <h5 id="photo_text">Add Photos</h5>
+                                            <img id="photo" style="width:3rem;"
                                                 src="{% static "images/camera.png" %}" alt="Card image"
                                                 class="card-img-top">
                                             <input type="file" multiple style="display: none;" name="photo"
-                                                id="photo-file">
+                                                id="W_photo-file">
                                         </div>
                                     </label>
                                 </div>
@@ -181,21 +181,21 @@ Add new case
                                     <div class="row">
                                         <div class="col">
                                             <label for="fname">First Name</label>
-                                            <input type="text" class="form-control" id="fname">
+                                            <input type="text" class="form-control" id="W_fname">
                                         </div>
                                         <div class="col">
                                             <label for="mname">Middle Name</label>
-                                            <input type="text" class="form-control" id="mname">
+                                            <input type="text" class="form-control" id="W_mname">
                                         </div>
                                         <div class="col">
                                             <label for="lname">Last Name</label>
-                                            <input type="text" class="form-control" id="lname">
+                                            <input type="text" class="form-control" id="W_lname">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <label for="sex">Sex</label>
-                                            <select name="sex" id="inputState" class="form-control">
+                                            <select name="sex" id="W_sex" class="form-control">
                                                 <option></option>
                                                 <option>Male</option>
                                                 <option>Female</option>
@@ -203,93 +203,93 @@ Add new case
                                         </div>
                                         <div class="col-md-6">
                                             <label for="age">Age</label>
-                                            <input type="number" min="0" class="form-control" id="age">
+                                            <input type="number" min="0" class="form-control" id="W_age">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <label for="date_of_birth">Date of birth</label>
-                                            <input type="date" class="form-control" id="date_of_birth">
+                                            <input type="date" class="form-control" id="W_date_of_birth">
                                         </div>
                                         <div class="col-md-6">
                                             <label for="place_of_birth">Place of birth</label>
-                                            <input type="text" class="form-control" id="place_of_birth">
+                                            <input type="text" class="form-control" id="W_place_of_birth">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col">
                                             <label for="nationality">Nationality</label>
-                                            <input type="text" class="form-control" id="nationality">
+                                            <input type="text" class="form-control" id="W_nationality">
                                         </div>
                                         <div class="col">
                                             <label for="ethnicity">Ethnicity</label>
-                                            <input type="text" class="form-control" id="ethnicity">
+                                            <input type="text" class="form-control" id="W_ethnicity">
                                         </div>
                                         <div class="col">
                                             <label for="religion">Religion</label>
-                                            <input type="text" class="form-control" id="religion">
+                                            <input type="text" class="form-control" id="W_religion">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group col-md-6">
                                             <label for="income">Income</label>
-                                            <input type="number" min="0" class="form-control" id="income">
+                                            <input type="number" min="0" class="form-control" id="W_income">
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="mobile">Mobile</label>
-                                            <input type="tel" class="form-control" id="mobile">
+                                            <input type="tel" class="form-control" id="W_mobile">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group col">
                                             <label for="house_no">House number</label>
-                                            <input type="number" min="0" class="form-control" id="house_no">
+                                            <input type="number" min="0" class="form-control" id="W_house_no">
                                         </div>
                                         <div class="form-group col">
                                             <label for="kebele">Kebele</label>
-                                            <input type="number" min="0" class="form-control" id="kebele">
+                                            <input type="number" min="0" class="form-control" id="W_kebele">
                                         </div>
                                         <div class="form-group col">
                                             <label for="subcity">Subcity</label>
-                                            <input type="text" class="form-control" id="subcity">
+                                            <input type="text" class="form-control" id="W_subcity">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group col">
                                             <label for="former_house_no">Former house number</label>
-                                            <input type="number" min="0" class="form-control" id="former_house_no">
+                                            <input type="number" min="0" class="form-control" id="W_former_house_no">
                                         </div>
                                         <div class="form-group col">
                                             <label for="former_kebele">Former Kebele</label>
-                                            <input type="number" min="0" class="form-control" id="former_kebele">
+                                            <input type="number" min="0" class="form-control" id="W_former_kebele">
                                         </div>
                                         <div class="form-group col">
                                             <label for="former_wereda">Former Wereda</label>
-                                            <input type="number" min="0" class="form-control" id="former_wereda">
+                                            <input type="number" min="0" class="form-control" id="W_former_wereda">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group col">
                                             <label for="salary">Salary</label>
-                                            <input type="number" min="0" class="form-control" id="salary">
+                                            <input type="number" min="0" class="form-control" id="W_salary">
                                         </div>
                                         <div class="form-group col">
-                                            <label for="kebele">Role</label>
-                                            <input type="text" class="form-control" id="kebele">
+                                            <label for="role">Role</label>
+                                            <input type="text" class="form-control" id="W_role">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group col">
                                             <label for="work">Work type</label>
-                                            <input type="text" class="form-control" id="work">
+                                            <input type="text" class="form-control" id="W_work">
                                         </div>
                                         <div class="form-group col">
                                             <label for="address">Address</label>
-                                            <input type="text" class="form-control" id="address">
+                                            <input type="text" class="form-control" id="W_address">
                                         </div>
                                     </div>
 
-                                    <button class="mx-auto btn btn-primary mt-3" style="width: 200px;">Submit</button>
+                                    <button class="mx-auto btn btn-primary mt-3" id="submit_btn" style="width: 200px;">Submit</button>
                                 </div>
                             </div>
                         </form>
@@ -311,14 +311,14 @@ Add new case
                             <div class="row ml-2">
                                 <div class="form-group card text-center col-3" id="upload-photo"
                                     style="width:12rem;height: 12rem;">
-                                    <label for="photo-file" class="card-title">
+                                    <label for="P_photo-file" class="card-title">
                                         <div class="card-img-overlay" style="cursor: pointer;">
-                                            <h5>Add Photos</h5>
-                                            <img style="width:3rem;"
+                                            <h5 id="photo_text">Add Photos</h5>
+                                            <img id="photo" style="width:3rem;"
                                                 src="{% static "images/camera.png" %}" alt="Card image"
                                                 class="card-img-top">
                                             <input type="file" multiple style="display: none;" name="photo"
-                                                id="photo-file">
+                                                id="P_photo-file">
                                         </div>
                                     </label>
                                 </div>
@@ -326,21 +326,21 @@ Add new case
                                     <div class="row">
                                         <div class="col">
                                             <label for="fname">First Name</label>
-                                            <input type="text" class="form-control" id="fname">
+                                            <input type="text" class="form-control" id="P_fname">
                                         </div>
                                         <div class="col">
                                             <label for="mname">Middle Name</label>
-                                            <input type="text" class="form-control" id="mname">
+                                            <input type="text" class="form-control" id="P_mname">
                                         </div>
                                         <div class="col">
                                             <label for="lname">Last Name</label>
-                                            <input type="text" class="form-control" id="lname">
+                                            <input type="text" class="form-control" id="P_lname">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <label for="sex">Sex</label>
-                                            <select name="sex" id="inputState" class="form-control">
+                                            <select name="sex" id="P_sex" class="form-control">
                                                 <option></option>
                                                 <option>Male</option>
                                                 <option>Female</option>
@@ -348,93 +348,93 @@ Add new case
                                         </div>
                                         <div class="col-md-6">
                                             <label for="age">Age</label>
-                                            <input type="number" min="0" class="form-control" id="age">
+                                            <input type="number" min="0" class="form-control" id="P_age">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <label for="date_of_birth">Date of birth</label>
-                                            <input type="date" class="form-control" id="date_of_birth">
+                                            <input type="date" class="form-control" id="P_date_of_birth">
                                         </div>
                                         <div class="col-md-6">
                                             <label for="place_of_birth">Place of birth</label>
-                                            <input type="text" class="form-control" id="place_of_birth">
+                                            <input type="text" class="form-control" id="P_place_of_birth">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col">
                                             <label for="nationality">Nationality</label>
-                                            <input type="text" class="form-control" id="nationality">
+                                            <input type="text" class="form-control" id="P_nationality">
                                         </div>
                                         <div class="col">
                                             <label for="ethnicity">Ethnicity</label>
-                                            <input type="text" class="form-control" id="ethnicity">
+                                            <input type="text" class="form-control" id="P_ethnicity">
                                         </div>
                                         <div class="col">
                                             <label for="religion">Religion</label>
-                                            <input type="text" class="form-control" id="religion">
+                                            <input type="text" class="form-control" id="P_religion">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group col-md-6">
                                             <label for="income">Income</label>
-                                            <input type="number" min="0" class="form-control" id="income">
+                                            <input type="number" min="0" class="form-control" id="P_income">
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="mobile">Mobile</label>
-                                            <input type="tel" class="form-control" id="mobile">
+                                            <input type="tel" class="form-control" id="P_mobile">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group col">
                                             <label for="house_no">House number</label>
-                                            <input type="number" min="0" class="form-control" id="house_no">
+                                            <input type="number" min="0" class="form-control" id="P_house_no">
                                         </div>
                                         <div class="form-group col">
                                             <label for="kebele">Kebele</label>
-                                            <input type="number" min="0" class="form-control" id="kebele">
+                                            <input type="number" min="0" class="form-control" id="P_kebele">
                                         </div>
                                         <div class="form-group col">
                                             <label for="subcity">Subcity</label>
-                                            <input type="text" class="form-control" id="subcity">
+                                            <input type="text" class="form-control" id="P_subcity">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group col">
                                             <label for="former_house_no">Former house number</label>
-                                            <input type="number" min="0" class="form-control" id="former_house_no">
+                                            <input type="number" min="0" class="form-control" id="P_former_house_no">
                                         </div>
                                         <div class="form-group col">
                                             <label for="former_kebele">Former Kebele</label>
-                                            <input type="number" min="0" class="form-control" id="former_kebele">
+                                            <input type="number" min="0" class="form-control" id="P_former_kebele">
                                         </div>
                                         <div class="form-group col">
                                             <label for="former_wereda">Former Wereda</label>
-                                            <input type="number" min="0" class="form-control" id="former_wereda">
+                                            <input type="number" min="0" class="form-control" id="P_former_wereda">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group col">
                                             <label for="salary">Salary</label>
-                                            <input type="number" min="0" class="form-control" id="salary">
+                                            <input type="number" min="0" class="form-control" id="P_salary">
                                         </div>
                                         <div class="form-group col">
-                                            <label for="kebele">Role</label>
-                                            <input type="text" class="form-control" id="kebele">
+                                            <label for="role">Role</label>
+                                            <input type="text" class="form-control" id="P_role">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group col">
                                             <label for="work">Work type</label>
-                                            <input type="text" class="form-control" id="work">
+                                            <input type="text" class="form-control" id="P_work">
                                         </div>
                                         <div class="form-group col">
                                             <label for="address">Address</label>
-                                            <input type="text" class="form-control" id="address">
+                                            <input type="text" class="form-control" id="P_address">
                                         </div>
                                     </div>
 
-                                    <button class="mx-auto btn btn-primary mt-3" style="width: 200px;">Submit</button>
+                                    <button class="mx-auto btn btn-primary mt-3" id="submit_btn" style="width: 200px;">Submit</button>
                                 </div>
                             </div>
 

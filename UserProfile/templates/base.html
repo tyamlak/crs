@@ -9,7 +9,7 @@
 		{% block title %}{% endblock %}
 	</title>
 	<link href="{% static "css/bootstrap4.min.css" %}" rel="stylesheet" type="text/css">
-	<link href="{% static "css/styles.css" %}" rel="stylesheet" type="text/css">
+	<link href="{% static "css/styles2.css" %}" rel="stylesheet" type="text/css">
 	{% block head %}{% endblock %}
 </head>
 
@@ -99,7 +99,7 @@
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="submit" value="Connect" class="btn btn-danger ml-2" data-dismiss="modal"><span
+					<button type="submit" value="Connect" class="btn btn-danger ml-2 hid" data-dismiss="modal"><span
 							class="glyphicon glyphicon-remove"></span> Cancel</button>
 					<p class="mx-5">Not a member? <a href="{% url "index" %}">Sign Up</a></p>
 					<p class="mr-5">Forgot <a href="#">Password?</a></p>

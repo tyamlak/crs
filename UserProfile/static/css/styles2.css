@@ -1,0 +1,76 @@
+body {
+	padding-top: 50px;
+	background-image: url("../images/bg.jpg");
+}
+
+#topnav {
+	font-weight: bolder;
+	text-align: center;
+}
+
+.navbar {
+	border: none;
+	background: rgba(0, 0, 0);
+}
+
+.hid {
+	display: none;
+}
+
+#project_info a {
+	text-decoration: none;
+}
+
+@media screen and (min-width: 400px) {
+	.card-img-overlay {
+		padding: 0.25rem;
+	}
+	#upload-photo {
+		height: 8rem !important;
+	}
+	#photo {
+		width: 0.5rem;
+	}
+	#photo_text {
+		font-size: 0.75rem;
+	}
+	#submit_btn {
+		width: 150px !important;
+	}
+}
+
+@media screen and (min-width: 300px) {
+	.card-img-overlay {
+		padding: 0.25rem;
+	}
+	#upload-photo {
+		height: 8rem !important;
+	}
+	#photo {
+		width: 0.5rem;
+	}
+	#photo_text {
+		font-size: 0.75rem;
+	}
+	#submit_btn {
+		width: 150px !important;
+	}
+}
+
+@media screen and (min-width: 200px) {
+	.card-img-overlay {
+		padding: 0.25rem;
+	}
+	#upload-photo {
+		height: 8rem !important;
+	}
+	#photo {
+		width: 0.5rem;
+	}
+	#photo_text {
+		font-size: 0.75rem;
+	}
+	#submit_btn {
+		width: 150px !important;
+	}
+}
