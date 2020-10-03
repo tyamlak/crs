@@ -28,8 +28,8 @@ body {
 	#upload-photo {
 		height: 8rem !important;
 	}
-	#photo {
-		width: 0.5rem;
+	#C_photo-filephoto {
+		width: 0.25rem !important;
 	}
 	#photo_text {
 		font-size: 0.75rem;
@@ -46,8 +46,8 @@ body {
 	#upload-photo {
 		height: 8rem !important;
 	}
-	#photo {
-		width: 0.5rem;
+	#C_photo-filephoto {
+		width: 0.25rem !important;
 	}
 	#photo_text {
 		font-size: 0.75rem;
@@ -64,8 +64,8 @@ body {
 	#upload-photo {
 		height: 8rem !important;
 	}
-	#photo {
-		width: 0.5rem;
+	#C_photo-filephoto {
+		width: 0.5rem !important;
 	}
 	#photo_text {
 		font-size: 0.75rem;

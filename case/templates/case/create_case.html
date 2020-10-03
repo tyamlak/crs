@@ -25,26 +25,26 @@ Add new case
                                     <label for="C_photo-file" class="card-title">
                                         <div class="card-img-overlay" style="cursor: pointer;">
                                             <h5 id="photo_text">Add Photos</h5>
-                                            <img id="photo" style="width:3rem;"
+                                            <img id="C_photo-filephoto" style="width:3rem;"
                                                 src="{% static "images/camera.png" %}" alt="Card image"
                                                 class="card-img-top">
-                                            <input type="file" multiple style="display: none;" name="photo"
-                                                id="C_photo-file">
+                                            <input type="file" onchange="add_image(event)" multiple
+                                                style="display: none;" name="photo" id="C_photo-file">
                                         </div>
                                     </label>
                                 </div>
                                 <div class="col-9">
                                     <div class="row">
                                         <div class="col">
-                                            <label for="fname">First Name</label>
+                                            <label for="C_fname">First Name</label>
                                             <input type="text" class="form-control" id="C_fname">
                                         </div>
                                         <div class="col">
-                                            <label for="mname">Middle Name</label>
+                                            <label for="C_mname">Middle Name</label>
                                             <input type="text" class="form-control" id="C_mname">
                                         </div>
                                         <div class="col">
-                                            <label for="lname">Last Name</label>
+                                            <label for="C_lname">Last Name</label>
                                             <input type="text" class="form-control" id="C_lname">
                                         </div>
                                     </div>
@@ -144,7 +144,8 @@ Add new case
                                             <input type="text" class="form-control" id="C_address">
                                         </div>
                                     </div>
-                                    <button class="mx-auto btn btn-primary mt-3" id="submit_btn" style="width: 200px;">Submit</button>
+                                    <button class="mx-auto btn btn-primary mt-3" id="submit_Cbtn"
+                                        style="width: 200px;">Submit</button>
                                 </div>
                             </div>
                         </form>
@@ -164,19 +165,6 @@ Add new case
                     <div class="form-row">
                         <form method="POST" enctype="multipart/form-data">
                             <div class="row ml-2">
-                                <div class="form-group card text-center col-3" id="upload-photo"
-                                    style="width:12rem;height: 12rem;">
-                                    <label for="W_photo-file" class="card-title">
-                                        <div class="card-img-overlay" style="cursor: pointer;">
-                                            <h5 id="photo_text">Add Photos</h5>
-                                            <img id="photo" style="width:3rem;"
-                                                src="{% static "images/camera.png" %}" alt="Card image"
-                                                class="card-img-top">
-                                            <input type="file" multiple style="display: none;" name="photo"
-                                                id="W_photo-file">
-                                        </div>
-                                    </label>
-                                </div>
                                 <div class="col-9">
                                     <div class="row">
                                         <div class="col">
@@ -289,7 +277,8 @@ Add new case
                                         </div>
                                     </div>
 
-                                    <button class="mx-auto btn btn-primary mt-3" id="submit_btn" style="width: 200px;">Submit</button>
+                                    <button class="mx-auto btn btn-primary mt-3" id="submit_Wbtn"
+                                        style="width: 200px;">Submit</button>
                                 </div>
                             </div>
                         </form>
@@ -309,19 +298,6 @@ Add new case
                     <div class="form-row">
                         <form method="POST" enctype="multipart/form-data">
                             <div class="row ml-2">
-                                <div class="form-group card text-center col-3" id="upload-photo"
-                                    style="width:12rem;height: 12rem;">
-                                    <label for="P_photo-file" class="card-title">
-                                        <div class="card-img-overlay" style="cursor: pointer;">
-                                            <h5 id="photo_text">Add Photos</h5>
-                                            <img id="photo" style="width:3rem;"
-                                                src="{% static "images/camera.png" %}" alt="Card image"
-                                                class="card-img-top">
-                                            <input type="file" multiple style="display: none;" name="photo"
-                                                id="P_photo-file">
-                                        </div>
-                                    </label>
-                                </div>
                                 <div class="col-9">
                                     <div class="row">
                                         <div class="col">
@@ -434,7 +410,8 @@ Add new case
                                         </div>
                                     </div>
 
-                                    <button class="mx-auto btn btn-primary mt-3" id="submit_btn" style="width: 200px;">Submit</button>
+                                    <button class="mx-auto btn btn-primary mt-3" id="submit_Pbtn"
+                                        style="width: 200px;">Submit</button>
                                 </div>
                             </div>
 
@@ -447,4 +424,22 @@ Add new case
     </div>
 
 </main>
+<script>
+    function add_image(event) {
+        console.log(event.target.id);
+        let preview = document.getElementById(`${event.target.id}photo`);
+        let file = document.querySelector('input[type=file]').files[0];
+        let reader = new FileReader();
+
+        reader.addEventListener("load", function () {
+            // convert image file to base64 string
+            preview.src = reader.result;
+            preview.style = "width:8rem;height:6rem";
+        }, false);
+
+        if (file) {
+            reader.readAsDataURL(file);
+        }
+    }
+</script>
 {% endblock %}
