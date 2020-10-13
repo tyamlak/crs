@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from UserProfile.forms import *
-from UserProfile.models import Person, PhoneNumber, Work, Residence, ImageEncoding, Criminal
+from UserProfile.models import Person, ImageEncoding, Criminal
 from random import randint
 
 from case.utils import log_activity
@@ -63,53 +62,3 @@ def search_image(request):
 				return render('case/index.html',{'error':'Image Not found in Database.'})
 		return redirect('case-index')
 	return render(request,'case/search_image.html')
-
-
-
-def is_form_valid(f):
-	if f.is_valid():
-		return True
-	return False
-
-
-#@login_required # requires(police/data_encoder)decorators
-def create_case(request):
-	if request.POST:
-		error = 'Model Not Saved.'
-		phone_form = PhoneForm(request.POST,request.FILES)
-		person_form = PersonForm(request.POST,request.FILES)
-		residence_form = ResidenceForm(request.POST,request.FILES)
-		work_form = WorkForm(request.POST,request.FILES)
-		if person_form.is_valid():
-			person = person_form.instance
-			forms = [phone_form,residence_form,work_form]
-			result = map(is_form_valid,forms)
-			if all(result):
-				work_form.instance.save()
-				residence_form.instance.save()
-				phone_form.instance.save()
-				person.work = work_form.instance
-				person.phone_number = phone_form.instance
-				person.living_address = residence_form.instance
-				person.save()
-				error = 'Data saved Successfully.'
-		return render(
-			request,'case/index.html',{
-				'error':error
-			}
-		)
-	person = PersonForm()
-	image_form = CriminalImageForm()
-	phone = PhoneForm()
-	work = WorkForm()
-	residence = ResidenceForm()
-	
-	return render(
-		request,'case/create_case.html',{
-			'person':person,
-			'image_form':image_form,
-			'phone':phone,
-			'work':work,
-			'residence':residence,
-		}
-	)
