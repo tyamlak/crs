@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    Criminal Detail
+{% endblock %}
+{% block content %}
+    {% for person,img in matches %}
+        <h2>{{ person }}</h2>
+        <h3>{{ person.profile.living_address }}</h3>
+        <img  src="{{ img.image.url  }}" height="500px" width="350" alt="criminal image">
+        <br>
+    {% endfor %}
+{% endblock %}

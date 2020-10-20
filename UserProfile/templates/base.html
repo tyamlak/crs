@@ -41,6 +41,9 @@
 				<li class="nav-item"><a class="nav-link" href="{% url "new-case" %}">Add New Case</a></li>
 				<li class="nav-item"><a class="nav-link" href="{% url "charts" %}">Charts</a></li>
 			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li class="nav-item"><a class="nav-link" href="{% url "search-image" %}"> <img src="{% static "images/search-blue.png" %}" height="30px" width="30px" "> </a></li>
+			</ul>
 			<script>
 				function active_nav() {
 					ln = document.getElementById("lnav")
@@ -56,7 +59,7 @@
 				active_nav()
 			</script>
 
-			<ul class="navbar-nav navbar-right">
+			<ul class="nav navbar-nav navbar-right">
 				{% if user.is_authenticated %}
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">{{user}}

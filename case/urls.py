@@ -9,7 +9,7 @@ urlpatterns = [
     path('new',create_case,name='new-case'),
     path('edit/<int:pk>',edit_case,name='edit-case'),
     path('add-image',add_image,name='add_image'),
-    path('search',search_image,name='search'),
+    path('imgsearch',search_image,name='search-image'),
     path('criminal/<int:pk>/',criminal_detail,name='criminal'),
     path('stats',HomeView.as_view(),name='charts'),
     path('api/crimes',CrimeTypeDist.as_view()),

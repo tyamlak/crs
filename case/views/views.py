@@ -1,16 +1,17 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from UserProfile.models import Person, ImageEncoding, Criminal
+from UserProfile.models import Person, ImageEncoding, Criminal, CriminalImage
 from random import randint
 
 from case.utils import log_activity
+from UserProfile.forms import CriminalImageForm
 
 
 def get_map(request):
 	return render(request,'case/ac_map.html')
 
 @log_activity
-def index(request):
+def index(request,message=None):
 	return render(
 		request,'case/index.html',{
 			'login_required':False
@@ -32,7 +33,10 @@ def add_image(request):
 		image_form = CriminalImageForm(request.POST,request.FILES)
 		if image_form.is_valid():
 			pk = image_form.instance.criminal_id
-			image_form.instance.save()
+			criminal = Criminal.objects.get(pk=pk)
+			uploaded_image = request.FILES.get('image')
+			image_model = CriminalImage(image=uploaded_image,criminal=criminal)
+			image_model.save()
 			print(f'Redirecting to {pk}')
 			return redirect('criminal',pk)
 
@@ -42,23 +46,3 @@ def add_image(request):
 			'image_form':image_form,
 		}
 	)
-
-def search_image(request):
-	if request.POST:
-		file = request.FILES.get('image_file')
-		import face_recognition, pickle
-		new_image = face_recognition.load_image_file(file)
-		if new_image is None:
-			print('Image could not be opened')
-			return redirect('case-index')
-		new_encodings = face_recognition.face_encodings(new_image)
-		ie_models = ImageEncoding.objects.all()
-		for ob in ie_models:
-			encoding = pickle.loads(ob.encoding)
-			match = face_recognition.compare_faces(new_encodings,encoding)
-			if True in match:
-				return redirect('criminal',ob.criminal_id)
-			else:
-				return render('case/index.html',{'error':'Image Not found in Database.'})
-		return redirect('case-index')
-	return render(request,'case/search_image.html')
