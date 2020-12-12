@@ -1,31 +1,133 @@
-{% load crispy_forms_tags %}
+{% load static %}
 
-<div class="card-header">
-    <a class="card-link" data-toggle="collapse" href="#plaintiff_form">
-        <h5>Plaintiff Form</h5>
-    </a>
-</div>
-<div id="plaintiff_form" class="collapse" data-parent="#accordion">
-    <div class="card-body">
-        <div class="form-row">
-            <form method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
-                <div class="form-group">
-                    {% crispy person %}
-                </div>
-                <div class="form-group">
-                    {% crispy image_form %}
-                </div>
-                <div class="form-group">
-                    {% crispy residence %}
-                </div>
-                <div class="form-group">
-                    {% crispy phone %}
-                </div>
-                <div class="form-group">
-                    {% crispy work %}
-                </div>
-            </form>
+<div class="tab-pane " id="plaintiff_form">
+    <div class="card">
+        <div class="card-body">
+            <h4>Plaintiff Form</h4>
+            <div class="form-row">
+                <form method="POST" enctype="multipart/form-data">
+                    <div class="row ml-2">
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col">
+                                    <label for="fname">First Name</label>
+                                    <input type="text" name="fname" class="form-control" id="W_fname">
+                                </div>
+                                <div class="col">
+                                    <label for="mname">Middle Name</label>
+                                    <input type="text" name="mname" class="form-control" id="W_mname">
+                                </div>
+                                <div class="col">
+                                    <label for="lname">Last Name</label>
+                                    <input type="text" name="lname" class="form-control" id="W_lname">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="sex">Sex</label>
+                                    <select name="sex" id="W_sex" class="form-control">
+                                        <option></option>
+                                        <option>Male</option>
+                                        <option>Female</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="age">Age</label>
+                                    <input type="number" name="age" min="0" class="form-control" id="W_age">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="date_of_birth">Date of birth</label>
+                                    <input type="date" name="dob" class="form-control" id="W_date_of_birth">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="place_of_birth">Place of birth</label>
+                                    <input type="text" name="pob" class="form-control" id="W_place_of_birth">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <label for="nationality">Nationality</label>
+                                    <input type="text" name="nationality" class="form-control" id="W_nationality">
+                                </div>
+                                <div class="col">
+                                    <label for="ethnicity">Ethnicity</label>
+                                    <input type="text" name="ethnicity" class="form-control" id="W_ethnicity">
+                                </div>
+                                <div class="col">
+                                    <label for="religion">Religion</label>
+                                    <input type="text" name="religion" class="form-control" id="W_religion">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label for="income">Income</label>
+                                    <input type="number" name="income" min="0" class="form-control" id="W_income">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="mobile">Mobile</label>
+                                    <input type="tel" name="mobile" class="form-control" id="W_mobile">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col">
+                                    <label for="house_no">House number</label>
+                                    <input type="number" name="house_no" min="0" class="form-control" id="W_house_no">
+                                </div>
+                                <div class="form-group col">
+                                    <label for="kebele">Kebele</label>
+                                    <input type="number" name="kebele" min="0" class="form-control" id="W_kebele">
+                                </div>
+                                <div class="form-group col">
+                                    <label for="subcity">Subcity</label>
+                                    <input type="text" name="subcity" class="form-control" id="W_subcity">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col">
+                                    <label for="former_house_no">Former house number</label>
+                                    <input type="number" min="0" name="former_house_no" class="form-control"
+                                        id="W_former_house_no">
+                                </div>
+                                <div class="form-group col">
+                                    <label for="former_kebele">Former Kebele</label>
+                                    <input type="number" name="former_kebele" min="0" class="form-control"
+                                        id="W_former_kebele">
+                                </div>
+                                <div class="form-group col">
+                                    <label for="former_wereda">Former Wereda</label>
+                                    <input type="number" name="former_wereda" min="0" class="form-control"
+                                        id="W_former_wereda">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col">
+                                    <label for="salary">Salary</label>
+                                    <input type="number" name="salary" min="0" class="form-control" id="W_salary">
+                                </div>
+                                <div class="form-group col">
+                                    <label for="role">Role</label>
+                                    <input type="text" name="role" class="form-control" id="W_role">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col">
+                                    <label for="work">Work type</label>
+                                    <input type="text" name="work_type" class="form-control" id="W_work">
+                                </div>
+                                <div class="form-group col">
+                                    <label for="address">Address</label>
+                                    <input type="text" name="address" class="form-control" id="W_address">
+                                </div>
+                            </div>
+
+                            <button class="mx-auto btn btn-primary mt-3" id="submit_Wbtn"
+                                style="width: 200px;">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>

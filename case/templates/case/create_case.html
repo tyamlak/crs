@@ -6,6 +6,37 @@ Add new case
 
 {% block content %}
 
-<h1>General Case Info Form</h1>
+<main class="container-fluid" style="margin:50px 0px">
+    <h3>General case info form</h3>
+    <form method="POST" enctype="multipart/form-data">
+        <div class="form-row">
+            <div class="form-group col-6">
+                <label for="police">Assigned police: </label>
+                <input type="text" class="form-control">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col">
+                <label for="category">Case Category: </label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="form-group col">
+                <label for="severity">Case Severity: </label>
+                <select class="form-container form-control" id="severity">
+                    <option value="high">High</option>
+                    <option value="mid">Mid</option>
+                    <option value="low">Low</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-6">
+                <label for="comment">Case description: </label>
+                <textarea class="form-control" rows="5" id="comment"></textarea>
+            </div>
+        </div>
+        <button class="mx-auto btn btn-primary mt-3" id="submit_Cbtn" style="width: 200px;">Submit</button>
+    </form>
+</main>
 
 {% endblock %}
