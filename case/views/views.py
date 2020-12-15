@@ -20,10 +20,13 @@ def index(request,message=None):
 
 def criminal_detail(request,pk):
 	ob = Criminal.objects.get(pk=pk)
-	img = ob.images.all()[randint(0,len(ob.images.all())-1)]
+	images = ob.images.all()
+	image_url = '' # url(static) of Null image
+	if len(images) >= 0:
+		image_url = images[0].image.url 
 	return render(
 		request,'case/criminal_detail.html',{
-			'person':ob,'img':img
+			'person':ob.profile,'image_url':image_url
 		}
 	)
 
