@@ -4,10 +4,24 @@
     Criminal Detail
 {% endblock %}
 {% block content %}
-    {% for person,img in matches %}
-        <h2>{{ person }}</h2>
-        <h3>{{ person.profile.living_address }}</h3>
-        <img  src="{{ img.image.url  }}" height="500px" width="350" alt="criminal image">
-        <br>
+    {% for person,image_url in matches %}
+        {% include "case/criminal_display_form.html" %}
     {% endfor %}
+    <div class="pagination">
+        <span class="step-links">
+            {% if matches.has_previous %}
+                <a href="?page=1&hash={{ hash }}">&laquo; first</a>
+                <a href="?page={{ matches.previous_page_number }}&hash={{ hash }}">previous</a>
+            {% endif %}
+    
+            <span class="current">
+                Page {{ matches.number }} of {{ matches.paginator.num_pages }}.
+            </span>
+    
+            {% if matches.has_next %}
+                <a href="?page={{ matches.next_page_number }}&hash={{ hash }}">next</a>
+                <a href="?page={{ matches.paginator.num_pages }}&hash={{ hash }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
 {% endblock %}
