@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import index, create_case, add_image, search_image, criminal_detail, get_map, edit_criminal_info, edit_case
+from .views import index, create_case, add_image, search_image, criminal_detail, get_map, edit_criminal_info, edit_case, add_criminal_to_case
 from .views.charts import (
     HomeView, CrimeTypeDist, SexDist, YearlyCrimeDist, MonthlyCrimeDist
 )
@@ -17,6 +17,8 @@ urlpatterns = [
     path('api/monthly/<int:year>/',MonthlyCrimeDist.as_view()),
     path('api/monthly',MonthlyCrimeDist.as_view()),
     path('api/yearly',YearlyCrimeDist.as_view()),
-    path('edit/criminal/<int:pk>',edit_criminal_info,name='edit-case'),
+    path('edit/criminal/<int:pk>',edit_criminal_info,name='edit-c-in-case'),
+    path('<int:pk>',edit_case,name='manage-case'),
+    path('<int:pk>/add-criminal',add_criminal_to_case,name='criminal_to_case'),
     path('maps',get_map,name='maps'),
 ]

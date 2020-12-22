@@ -5,7 +5,8 @@
         <div class="card-body">
             <h4>Criminal Form</h4>
             <div class="form-row">
-                <form method="POST" enctype="multipart/form-data">
+                <form method="POST" action="/case/{{case_no}}/add-criminal" enctype="multipart/form-data">
+                    {% csrf_token %}
                     <div class="row ml-2">
                         <div class="form-group card text-center col-3" id="upload-photo"
                             style="width:12rem;height: 12rem;">
@@ -38,14 +39,13 @@
                                 <div class="col-md-6">
                                     <label for="sex">Sex</label>
                                     <select name="sex" id="W_sex" class="form-control">
-                                        <option></option>
-                                        <option>Male</option>
-                                        <option>Female</option>
+                                        <option value="M" >Male</option>
+                                        <option value="F" >Female</option>
                                     </select>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="age">Age</label>
-                                    <input type="number" name="age" min="0" class="form-control" id="W_age">
+                                    <input type="number" name="age" min="0" max="125" class="form-control" id="W_age">
                                 </div>
                             </div>
                             <div class="row">
@@ -98,11 +98,6 @@
                             </div>
                             <div class="row">
                                 <div class="form-group col">
-                                    <label for="former_house_no">Former house number</label>
-                                    <input type="number" min="0" name="former_house_no" class="form-control"
-                                        id="W_former_house_no">
-                                </div>
-                                <div class="form-group col">
                                     <label for="former_kebele">Former Kebele</label>
                                     <input type="number" name="former_kebele" min="0" class="form-control"
                                         id="W_former_kebele">
@@ -119,8 +114,8 @@
                                     <input type="number" name="salary" min="0" class="form-control" id="W_salary">
                                 </div>
                                 <div class="form-group col">
-                                    <label for="role">Role</label>
-                                    <input type="text" name="role" class="form-control" id="W_role">
+                                    <label for="role">Work Role</label>
+                                    <input type="text" name="work_role" class="form-control" id="W_role">
                                 </div>
                             </div>
                             <div class="row">
@@ -129,8 +124,8 @@
                                     <input type="text" name="work_type" class="form-control" id="W_work">
                                 </div>
                                 <div class="form-group col">
-                                    <label for="address">Address</label>
-                                    <input type="text" name="address" class="form-control" id="W_address">
+                                    <label for="address">Work Address</label>
+                                    <input type="text" name="work_address" class="form-control" id="W_address">
                                 </div>
                             </div>
 
