@@ -5,7 +5,7 @@
         <div class="card-body">
             <h4>Plaintiff Form</h4>
             <div class="form-row">
-                <form method="POST" enctype="multipart/form-data">
+                <form method="POST" action="/case/{{case_no}}/add-plaintiff" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="row ml-2">
                         <div class="col-12">
