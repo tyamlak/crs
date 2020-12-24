@@ -1,6 +1,6 @@
 {% load static %}
 
-<div class="tab-pane active" id="criminal_form">
+<div class="tab-pane active mb-1 rounded-sm shadow-sm" id="criminal_form">
     <div class="card">
         <div class="card-body">
             <h4>Criminal Form</h4>
@@ -12,9 +12,9 @@
                             <label for="C_photo-file" class="card-title">
                                 <div class="card-img-overlay" style="cursor: pointer;">
                                     <h5 id="photo_text">Photos</h5>
-                                    <img id="C_photo-filephoto" style="width:3rem;"
-                                        src="{{ image_url }}" alt="Card image" class="card-img-top">
-                                    <input type="file" onchange="add_image(event)" multiple style="display: none;"
+                                    <img id="C_photo-filephoto" style="width:6rem;height: 6rem;" src="{{ image_url }}"
+                                        alt="Card image" class="card-img-top">
+                                    <input type="file" disabled onchange="add_image(event)" multiple style="display: none;"
                                         name="photo" id="C_photo-file">
                                 </div>
                             </label>
@@ -23,15 +23,18 @@
                             <div class="row">
                                 <div class="col">
                                     <label for="fname">First Name</label>
-                                    <input type="text" value="{{ person.first_name }}" disabled="true" name="fname" class="form-control" >
+                                    <input type="text" value="{{ person.first_name }}" disabled="true" name="fname"
+                                        class="form-control">
                                 </div>
                                 <div class="col">
                                     <label for="mname">Middle Name</label>
-                                    <input type="text" value="{{ person.middle_name }}" disabled="true" name="mname" class="form-control">
+                                    <input type="text" value="{{ person.middle_name }}" disabled="true" name="mname"
+                                        class="form-control">
                                 </div>
                                 <div class="col">
                                     <label for="lname">Last Name</label>
-                                    <input type="text" value="{{ person.last_name }}" disabled="true" name="lname" class="form-control">
+                                    <input type="text" value="{{ person.last_name }}" disabled="true" name="lname"
+                                        class="form-control">
                                 </div>
                             </div>
                             <div class="row">
@@ -40,104 +43,119 @@
                                     <select name="sex" disabled class="form-control">
                                         <option>
                                             {% if person.sex == 'M' %}
-                                                Male 
+                                            Male
                                             {% else %}
-                                                Female
+                                            Female
                                             {% endif %}
                                         </option>
                                     </select>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="age">Age</label>
-                                    <input type="number" value="{{ person.age }}" disabled="true" name="age" min="0" class="form-control">
+                                    <input type="number" value="{{ person.age }}" disabled="true" name="age" min="0"
+                                        class="form-control">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="date_of_birth">Date of birth</label>
-                                    <input type="text" value="{{ person.date_of_birth }}" disabled="true" name="dob" class="form-control">
+                                    <input type="text" value="{{ person.date_of_birth }}" disabled="true" name="dob"
+                                        class="form-control">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="place_of_birth">Place of birth</label>
-                                    <input type="text" value="{{ person.place_of_birth }}" disabled="true" name="pob" class="form-control">
+                                    <input type="text" value="{{ person.place_of_birth }}" disabled="true" name="pob"
+                                        class="form-control">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col">
                                     <label for="nationality">Nationality</label>
-                                    <input type="text" value="{{ person.nationality }}" disabled="true" name="nationality" class="form-control">
+                                    <input type="text" value="{{ person.nationality }}" disabled="true"
+                                        name="nationality" class="form-control">
                                 </div>
                                 <div class="col">
                                     <label for="ethnicity">Ethnicity</label>
-                                    <input type="text" value="{{ person.ethnicity }}" disabled="true" name="ethnicity" class="form-control">
+                                    <input type="text" value="{{ person.ethnicity }}" disabled="true" name="ethnicity"
+                                        class="form-control">
                                 </div>
                                 <div class="col">
                                     <label for="religion">Religion</label>
-                                    <input type="text" value="{{ person.religion }}" disabled="true" name="religion" class="form-control">
+                                    <input type="text" value="{{ person.religion }}" disabled="true" name="religion"
+                                        class="form-control">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-6">
                                     <label for="income">Income</label>
-                                    <input type="number" value="{{ person.income }}" disabled="true" name="income" min="0" class="form-control">
+                                    <input type="number" value="{{ person.income }}" disabled="true" name="income"
+                                        min="0" class="form-control">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="mobile">Mobile</label>
-                                    <input type="tel" value="{{ person.phone_number.mobile }}" disabled="true" name="mobile" class="form-control">
+                                    <input type="tel" value="{{ person.phone_number.mobile }}" disabled="true"
+                                        name="mobile" class="form-control">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col">
                                     <label for="house_no">House number</label>
-                                    <input type="number" value="{{person.living_address.house_number }}" disabled="true" name="house_no" min="0" class="form-control">
+                                    <input type="number" value="{{person.living_address.house_number }}" disabled="true"
+                                        name="house_no" min="0" class="form-control">
                                 </div>
                                 <div class="form-group col">
                                     <label for="kebele">Kebele</label>
-                                    <input type="number" value="{{person.living_address.kebele }}" disabled="true" name="kebele" min="0" class="form-control">
+                                    <input type="number" value="{{person.living_address.kebele }}" disabled="true"
+                                        name="kebele" min="0" class="form-control">
                                 </div>
                                 <div class="form-group col">
                                     <label for="subcity">Subcity</label>
-                                    <input type="text" value="{{person.living_address.subcity }}" disabled="true" name="subcity" class="form-control">
+                                    <input type="text" value="{{person.living_address.subcity }}" disabled="true"
+                                        name="subcity" class="form-control">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col">
                                     <label for="former_house_no">Former house number</label>
-                                    <input type="number" value="{{person.living_address.former_house_number }}" disabled="true" min="0" name="former_house_no" class="form-control"
-                                        >
+                                    <input type="number" value="{{person.living_address.former_house_number }}"
+                                        disabled="true" min="0" name="former_house_no" class="form-control">
                                 </div>
                                 <div class="form-group col">
                                     <label for="former_kebele">Former Kebele</label>
-                                    <input type="number" value="{{person.living_address.former_kebele }}" disabled="true" name="former_kebele" min="0" class="form-control"
-                                        >
+                                    <input type="number" value="{{person.living_address.former_kebele }}"
+                                        disabled="true" name="former_kebele" min="0" class="form-control">
                                 </div>
                                 <div class="form-group col">
                                     <label for="former_wereda">Former Wereda</label>
-                                    <input type="number" value="{{person.living_address.former_wereda }}" disabled="true" name="former_wereda" min="0" class="form-control"
-                                        >
+                                    <input type="number" value="{{person.living_address.former_wereda }}"
+                                        disabled="true" name="former_wereda" min="0" class="form-control">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col">
                                     <label for="salary">Salary</label>
-                                    <input type="number" value="{{ person.work.salary }}" disabled="true" name="salary" min="0" class="form-control">
+                                    <input type="number" value="{{ person.work.salary }}" disabled="true" name="salary"
+                                        min="0" class="form-control">
                                 </div>
                                 <div class="form-group col">
                                     <label for="role">Role</label>
-                                    <input type="text" value="{{ person.work.role }}" disabled="true" name="role" class="form-control">
+                                    <input type="text" value="{{ person.work.role }}" disabled="true" name="role"
+                                        class="form-control">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col">
                                     <label for="work">Work type</label>
-                                    <input type="text" value="{{ person.work.work_type }}" disabled="true" name="work_type" class="form-control">
+                                    <input type="text" value="{{ person.work.work_type }}" disabled="true"
+                                        name="work_type" class="form-control">
                                 </div>
                                 <div class="form-group col">
                                     <label for="address">Work Address</label>
-                                    <input type="text" value="{{ person.work.address }}" disabled="true" name="address" class="form-control" id="W_address">
+                                    <input type="text" value="{{ person.work.address }}" disabled="true" name="address"
+                                        class="form-control" id="W_address">
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div>
                 </form>
