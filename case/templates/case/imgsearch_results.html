@@ -1,27 +1,30 @@
 {% extends "base.html" %}
 {% load static %}
 {% block title %}
-    Criminal Detail
+Criminal Detail
 {% endblock %}
 {% block content %}
-    {% for person,image_url in matches %}
-        {% include "case/criminal_display_form.html" %}
-    {% endfor %}
-    <div class="pagination">
-        <span class="step-links">
-            {% if matches.has_previous %}
-                <a href="?page=1&hash={{ hash }}">&laquo; first</a>
-                <a href="?page={{ matches.previous_page_number }}&hash={{ hash }}">previous</a>
-            {% endif %}
-    
-            <span class="current">
-                Page {{ matches.number }} of {{ matches.paginator.num_pages }}.
-            </span>
-    
-            {% if matches.has_next %}
-                <a href="?page={{ matches.next_page_number }}&hash={{ hash }}">next</a>
-                <a href="?page={{ matches.paginator.num_pages }}&hash={{ hash }}">last &raquo;</a>
-            {% endif %}
-        </span>
-    </div>
+{% for person,image_url in matches %}
+{% include "case/criminal_display_form.html" %}
+{% endfor %}
+<ul class="pagination pagination-lg justify-content-center" style="margin:20px 0;">
+
+    {% if matches.has_previous %}
+    <li class="page-item"><a class="page-link" href="?page=1&hash={{ hash }}">&laquo; first</a></li>
+    <li class="page-item"><a class="page-link"
+            href="?page={{ matches.previous_page_number }}&hash={{ hash }}">previous</a></li>
+    {% endif %}
+
+    <li class="current page-item disabled">
+        <a class="page-link"> Page {{ matches.number }} of {{ matches.paginator.num_pages }}.</a>
+    </li>
+
+    {% if matches.has_next %}
+    <li class="page-item"><a class="page-link" href="?page={{ matches.next_page_number }}&hash={{ hash }}">next</a>
+    </li>
+    <li class="page-item"><a class="page-link" href="?page={{ matches.paginator.num_pages }}&hash={{ hash }}">last
+            &raquo;</a></li>
+    {% endif %}
+
+</ul>
 {% endblock %}
