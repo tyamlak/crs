@@ -10,7 +10,10 @@ Edit case
 
     <ul class="nav nav-tabs" role="tablist">
         <li class="nav-item">
-            <a class="nav-link active" data-toggle="tab" href="#criminal_form">Criminal Form</a>
+            <a class="nav-link active" data-toggle="tab" href="#general_form">General Form</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#criminal_form">Criminal Form</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" data-toggle="tab" href="#witness_form">Witness Form</a>
@@ -21,6 +24,9 @@ Edit case
     </ul>
 
     <div class="tab-content">
+
+        <!-- General form -->
+        {% include "case/general_form.html" %}
 
         <!-- Criminal form -->
         {% include "case/criminal_form.html" %}

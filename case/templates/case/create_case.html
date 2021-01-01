@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 {% load static %}
+{% block head %}
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+{% endblock %}
 {% block title %}
 Add new case
 {% endblock %}
@@ -9,34 +13,85 @@ Add new case
 <main class="container-fluid" style="margin:50px 0px">
     <h3>General case info form</h3>
     <form method="POST" enctype="multipart/form-data">
-        <div class="form-row">
-            <div class="form-group col-6">
-                <label for="police">Assigned police: </label>
-                <input type="text" class="form-control">
+        {% csrf_token %}
+        <div class="row ml-2">
+            <div class="col">
+                <div class="row">
+                    <div class="col">
+                        <label for="fname">Assigned police</label>
+                        <select class="form-container form-control" name="police" id="police">
+                            <option value="">Abebe</option>
+                            <option value="">Bekele</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 my-2">
+                        <label for="severity">Case Type</label>
+                        <select class="form-container form-control" id="severity">
+                            <option value="high">High</option>
+                            <option value="mid">Mid</option>
+                            <option value="low">Low</option>
+                        </select>
+                    </div>
+                    <div class="col-md-12 my-2">
+                        <label for="category">Case Category</label>
+                        <select name="category" class="form-control">
+                            <option value="Fraud">Fraud</option>
+                        </select>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group col">
-                <label for="category">Case Category: </label>
-                <input type="text" class="form-control">
-            </div>
-            <div class="form-group col">
-                <label for="severity">Case Severity: </label>
-                <select class="form-container form-control" id="severity">
-                    <option value="high">High</option>
-                    <option value="mid">Mid</option>
-                    <option value="low">Low</option>
-                </select>
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group col-6">
-                <label for="comment">Case description: </label>
-                <textarea class="form-control" rows="5" id="comment"></textarea>
+            <div class="col">
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label for="evidence">Evidence/Evidences</label>
+                        <input type="file" name="evidence" class="form-control" multiple id="evidence">
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="location">Add location</label>
+                        <input type="button" class="btn btn-primary form-control" data-toggle="modal"
+                            data-target="#locationModal" value="Add location">
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="description">Case description</label>
+                        <textarea class="form-control" id="description" rows="7"></textarea>
+                    </div>
+                </div>
             </div>
         </div>
         <button class="mx-auto btn btn-primary mt-3" id="submit_Cbtn" style="width: 200px;">Submit</button>
     </form>
 </main>
+
+<!-- The Modal -->
+<div class="modal" id="locationModal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="width: 800px; position: fixed; top: 50px; left: -130px;">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <div class="modal-body" style="display: inherit;">
+                <div id="mapId" style="width:800px; height: 500px;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    var mapOptions = {
+        center: [8.9806, 38.7578], // lat,long #A.A [8.9806, 38.7578]
+        zoom: 13
+    }
+
+    // Creating a map object
+    var map = new L.map('mapId', mapOptions);
+
+    // Creating a Layer object
+    var layer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
+
+    // Adding layer to the map
+    map.addLayer(layer);
+
+</script>
 
 {% endblock %}
