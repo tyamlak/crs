@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    Case Distribution
+{% endblock %}
+{%block head %}
+      <link rel = "stylesheet" href = "http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css"/>
+      <script src = "http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+{% endblock %}
+{% block content %}
+      <div id = "map" style = "width: 1500px; height: 600px"></div>
+      {% csrf_token %}
+      <script>
+
+        function get_location(e){
+            var endpoint = '/case/map-dist'
+            var csrf_token = document.getElementsByName("csrfmiddlewaretoken")[0]
+			$.ajax({
+				method: "POST",
+                url: endpoint,
+                data:{
+                    'csrfmiddlewaretoken': csrf_token.value,
+                },
+				success: function(data){
+                    console.log(data)
+                    map_location(data)
+				},
+				error: function(error_data){
+					console.log("error")
+					console.log(error_data)
+				}
+			})
+		}
+        
+        var redIcon = new L.Icon({
+            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
+            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowSize: [41, 41]
+        });
+
+        var mapOptions = {
+            center: [8.9806, 38.7578], // lat,long #A.A [8.9806, 38.7578]
+            zoom: 11
+        }
+
+        var map = new L.map('map', mapOptions);
+        var layer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
+        map.addLayer(layer);
+
+        function map_location(data){
+            var i = 0
+            var c_locations = data['locations']
+            var case_ids = data['case_id']
+            for (i=0;i<c_locations.length;i++){
+                marker = L.marker(c_locations[i],{
+                    icon: redIcon,
+                    title: "Case type",
+                    clickable: true,
+                    draggable: false,
+                    case_id: case_ids[i],
+                })
+                marker.on('click',function(e){
+                    console.log(this.options.title)
+                    console.log(this.options.case_id)
+                    window.location.assign(''+this.options.case_id)
+                })
+                marker.addTo(map)
+            }
+        }
+        window.onload = function(){
+            get_location()
+        }
+      </script>
+{% endblock %}

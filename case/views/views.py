@@ -6,9 +6,37 @@ from random import randint
 from case.utils import log_activity
 from UserProfile.forms import CriminalImageForm
 
+from case.models import Location
+from django.http.response import JsonResponse
+
 
 def get_map(request):
-	return render(request,'case/ac_map.html')
+	if request.POST:
+		lat = request.POST.get('latitude')
+		lng = request.POST.get('longtude')
+		c_location = Location(lat=float(lat),lng=float(lng))
+		c_location.save()
+		print("(lat,lng): ",lat,', ',lng)
+		data = {
+			'location': 'Received Location of Crimes in Addis',
+		}
+		return JsonResponse(data)
+	return render(request,'case/maps_location.html')
+
+def map_dist(request):
+	if request.POST:
+		c_locations = Location.objects.all()
+		locations = []
+		case_id = []
+		for lc in c_locations:
+			locations.append((lc.lat,lc.lng))
+			case_id.append(randint(1,123))
+		data = {
+			'locations':locations,
+			'case_id':case_id,
+		}
+		return JsonResponse(data)
+	return render(request,'case/map_dist.html')
 
 @log_activity
 def index(request,message=None):

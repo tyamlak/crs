@@ -1,101 +1,80 @@
 {% extends "base.html" %}
 {% load static %}
 {% block title %}
-    Google Map
+    Case Distribution
+{% endblock %}
+{%block head %}
+      <link rel = "stylesheet" href = "http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css"/>
+      <script src = "http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
 {% endblock %}
 {% block content %}
+      <div id = "map" style = "width: 900px; height: 580px"></div>
+      <br> <button class="close" onclick="save_location()" id="save_location">Save Location/</button><br>
+      {% csrf_token %}
+      <script>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=API_KEY"></script>
-<script type="text/javascript">
-    // variabel global marker
-    var marker;
+        function save_location(lat,lng){
+            var endpoint = '/case/maps'
+            var csrf_token = document.getElementsByName("csrfmiddlewaretoken")[0]
+			$.ajax({
+				method: "POST",
+                url: endpoint,
+                data:{
+                    'purpose': 'sending location',
+                    'csrfmiddlewaretoken': csrf_token.value,
+                    'latitude':lat,
+                    'longtude':lng,
+                },
+				success: function(data){
+					console.log(data)
+				},
+				error: function(error_data){
+					console.log("error")
+					console.log(error_data)
+				}
+			})
+		}
+		
+		var popup = L.popup();
+		function onMapClick(e) {
+			popup
+				.setLatLng(e.latlng)
+				.setContent("Yene Sefer " + e.latlng.toString())
+				.openOn(map);
+		}
 
-    function taruhMarker(peta, posisiTitik) {
-
-        if (marker) {
-            // pindahkan marker
-            marker.setPosition(posisiTitik);
-        } else {
-            // buat marker baru
-            marker = new google.maps.Marker({
-                position: posisiTitik,
-                map: peta,
-            });
+        var markerOptions = {
+            title: "Case type",
+            clickable: true,
+            draggable: true
         }
 
-        // animasi sekali
-        marker.setAnimation(google.maps.Animation.BOUNCE);
-        setTimeout(function() {
-            marker.setAnimation(null);
-        }, 750);
+        function addMarker(e){
+            c_location = e.latlng
+            var marker = L.marker(e.latlng,markerOptions)
+            console.log(location)
+            marker.addTo(map)
+            lat = c_location.lat
+            lng = c_location.lng 
+            save_location(lat,lng)
+        }
 
-        // kirim nilai koordinat ke input
-        $("input[name=longitude]").val(posisiTitik.lat());
-        $("input[name=latitude]").val(posisiTitik.lng());
+        // Creating map options
+        var mapOptions = {
+            center: [8.9806, 38.7578], // lat,long #A.A [8.9806, 38.7578]
+            zoom: 14
+        }
 
-        console.log($("input[name=longitude]").val() + "," + $("input[name=latitude]").val());
-    }
+        // Creating a map object
+        var map = new L.map('map', mapOptions);
 
-    function initialize() {
-        var propertiPeta = {
-            center: new google.maps.LatLng(-8.592487,116.109302),
-            zoom: 13,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
+		// onclick event
+		map.on('click',addMarker)
 
-        var peta = new google.maps.Map(document.getElementById("google-maps"), propertiPeta);
+        // Creating a Layer object
+        var layer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
 
-        // even listner ketika peta diklik
-        google.maps.event.addListener(peta, 'click', function(event) {
-            taruhMarker(this, event.latLng);
-        });
-
-        // marker.setMap(peta);
-    }
-    // event jendela di-load
-    google.maps.event.addDomListener(window, 'load', initialize);
-</script>
-
-<div class="card">
-    <div class="card-content">
-
-        <div class="row">
-            <form class="col s12">
-                <div class="row">
-                    <div class="input-field col s6">
-                        <input placeholder="Nama Lokasi" id="first_name" type="text" class="validate">
-                        <label for="first_name">Nama Lokasi</label>
-                    </div>
-
-                    <div class="input-field col s6">
-                        <select>
-                          <option value="" disabled selected>Pilih Jenis</option>
-                          <option value="1">Tempat Wisata</option>
-                          <option value="2">Persimpangan</option>
-                        </select>
-                        <label for="jenis">Jenis</label>
-                    </div>
-
-                    <div id="google-maps" style="height: 400px; width:100%"></div>
-
-                    <!-- input untuk menampung koordinat -->
-                    <input type="hidden" name="longitude" value="" />
-                    <input type="hidden" name="latitude" value="" />
-
-                    <br>
-                    <a class="waves-effect waves-light btn"><i class="material-icons left">done</i>Simpan</a>
-                </div>
-            </form>
-
-        </div>
-    </div>
-</div>
-
-<script type="text/javascript">
-$(document).ready(function() {
-    $('select').material_select();
-});
-</script>
-
-
+        // Adding layer to the map
+        map.addLayer(layer);
+      </script>
 {% endblock %}

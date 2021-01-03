@@ -30,3 +30,10 @@ class ActivityLog(models.Model):
 
     def __str__(self):
         return 'Took place on ' + datetime.strftime(self.logged_at,'%X %d/%m/%Y')
+
+
+class Location(models.Model):
+
+    case = models.ForeignKey(Case,on_delete=models.CASCADE,related_name='locations',blank=False)
+    lat = models.FloatField(blank=False)
+    lng = models.FloatField(blank=False)
