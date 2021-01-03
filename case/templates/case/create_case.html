@@ -50,7 +50,7 @@ Add new case
                     </div>
                     <div class="form-group col-md-12">
                         <label for="location">Add location</label>
-                        <input type="button" class="btn btn-primary form-control" data-toggle="modal"
+                        <input type="button" onclick="displayModalMap()" class="btn btn-primary form-control" data-toggle="modal"
                             data-target="#locationModal" value="Add location">
                     </div>
                     <div class="form-group col-md-12">
@@ -91,6 +91,13 @@ Add new case
 
     // Adding layer to the map
     map.addLayer(layer);
+
+    function displayModalMap(){
+        document.getElementById('locationModal').style.display = 'block';
+        setTimeout(function() {
+            map.invalidateSize();
+        }, 100);
+    }
 
 </script>
 
