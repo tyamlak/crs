@@ -8,7 +8,7 @@
                 <form method="POST" action="/case/{{case_no}}/add-witness" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="row ml-2">
-                        <div class="col-12">
+                        <div class="col-6">
                             <div class="row">
                                 <div class="col">
                                     <label for="fname">First Name</label>
@@ -117,11 +117,20 @@
                                     <input type="text" name="address" class="form-control" id="W_address">
                                 </div>
                             </div>
-
-                            <button class="mx-auto btn btn-primary mt-3" id="submit_Wbtn"
-                                style="width: 200px;">Submit</button>
+                        </div>
+                        <div class="col">
+                            <div class="form-group col">
+                                <label for="W_testimony_file">Testimony File/Files</label>
+                                <input type="file" name="testimony_file" class="form-control" multiple id="W_testimony_file">
+                            </div>
+                            <div class="form-group col">
+                                <label for="W_testimony">Witness Testimony</label>
+                                <textarea class="form-control" rows="5" id="W_testimony"></textarea>
+                            </div>
                         </div>
                     </div>
+
+                    <button class="mx-auto btn btn-primary mt-3" id="submit_Wbtn" style="width: 200px;">Submit</button>
                 </form>
             </div>
         </div>
