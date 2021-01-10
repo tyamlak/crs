@@ -1,10 +1,14 @@
 from django.shortcuts import render, redirect
 from UserProfile.models import (
-	Criminal, Plaintiff, Witness, Person, Work, PhoneNumber, Residence, CriminalImage
+	Criminal, Plaintiff, Witness, Person, Work, PhoneNumber, Residence, CriminalImage,
+	Police
 )
 from UserProfile.forms import PersonForm
 from case.form_tools import get_criminal_form_data
 from case.models import Case
+from case.models import CaseCategory
+from case.models import CaseFile
+from case.models import Location
 
 
 #@login_required # requires(police/data_encoder)decorators
@@ -12,13 +16,37 @@ def create_case(request):
 	error = ''
 	if request.POST:
 		error = ''
-		return render(
-			request,'case/index.html',{
-				'error':error
-			}
-		)
+		case_description = request.POST.get('case_description')
+		evidence_files = request.FILES.getlist('evidence')
+		assigned_police_list_pk = request.POST.getlist('allowed_polices')
+		crime_type_pk = request.POST.get('crime_type')
+		crime_type = CaseCategory.objects.get(pk=int(crime_type_pk))
+		location_string = request.POST.get('locations')
+		locations = location_string.split(';')
+	
+		case = Case()
+		case.description = case_description
+		case.save()
+		case.category.add(crime_type)
+		for p_id in assigned_police_list_pk:
+			try:
+				police = Police.objects.get(pk=int(p_id))
+			except Exception as e:
+				print('[ERORR]: ',e)
+				continue
+			case.police_set.add(police)
+		for f in evidence_files:
+			CaseFile(case=case,file=f).save()
+		for ls in locations:
+			lat, lng = ls.split(',')
+			Location(lat=lat,lng=lng,case=case).save()		
+
+		return redirect('edit-case',case.pk)
+	case_types = CaseCategory.objects.all()
+	list_of_police = Police.objects.all()
 	return render(
 		request,'case/create_case.html',{
+			'case_types':case_types,'police_list':list_of_police,
 			'error': error
 		}
 	)

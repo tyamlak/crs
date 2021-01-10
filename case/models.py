@@ -3,15 +3,45 @@ from UserProfile.models import Police, Criminal, Plaintiff, Witness
 from datetime import datetime
 
 
+class CaseCategory(models.Model):
+
+    class Meta:
+        verbose_name = "Case Category"
+
+    LIGHT = 'L'
+    MEDIUM = 'M'
+    SEVERE = 'S'
+    CASE_TYPE_CHOICES = (
+        (LIGHT,'Light'),
+        (MEDIUM,'Medium'),
+        (SEVERE,'Severe'),
+    )
+    crime_type = models.CharField(max_length=100,choices=CASE_TYPE_CHOICES,verbose_name='Case Category')
+    crime = models.CharField(max_length=200,blank=False,verbose_name='Crime Type')
+
+    def __str__(self):
+        return f'{self.crime} ==> {self.get_crime_type_display()}'
+
 class Case(models.Model):
+
+    class Meta:
+        verbose_name = 'Case'
+
     date_created = models.DateTimeField(auto_now_add=True)
     police_set = models.ManyToManyField(Police)
     criminals = models.ManyToManyField(Criminal)
     plaintiffs = models.ManyToManyField(Plaintiff)
     witness_set = models.ManyToManyField(Witness)
-    category = models.CharField(max_length=100)
+    category = models.ManyToManyField(CaseCategory)
     description = models.TextField(blank=False)
 
+
+class CaseType(models.Model):
+
+    class Meta:
+        verbose_name = 'Case Type'
+
+    case = models.ForeignKey(Case,on_delete=models.CASCADE,related_name='case_types')
 
 class CaseFile(models.Model):
 
@@ -37,3 +67,6 @@ class Location(models.Model):
     case = models.ForeignKey(Case,on_delete=models.CASCADE,related_name='locations',blank=False)
     lat = models.FloatField(blank=False)
     lng = models.FloatField(blank=False)
+
+    def __str__(self):
+        return f'(lat: {self.lat}, lng: {self.lng})'
