@@ -148,3 +148,21 @@
         </div>
     </div>
 </div>
+<script>
+    function add_image(event) {
+        let preview = document.getElementById(`${event.target.id}photo`);
+        let file = document.getElementById('C_photo-file').files[0];
+        // console.log(file);
+        let reader = new FileReader();
+
+        reader.addEventListener("load", function () {
+            // convert image file to base64 string
+            preview.src = reader.result;
+            preview.style = "width:8rem;height:6rem";
+        }, false);
+
+        if (file) {
+            reader.readAsDataURL(file);
+        }
+    }
+</script>
