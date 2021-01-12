@@ -1,4 +1,6 @@
 {% load static %}
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
 
 <div class="tab-pane active" id="general_form">
     <div class="card">
@@ -20,18 +22,14 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12 my-2">
-                                    <label for="severity">Case Type</label>
-                                    <select class="form-container form-control" id="severity">
-                                        <option value="high">High</option>
-                                        <option value="mid">Mid</option>
-                                        <option value="low">Low</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-12 my-2">
                                     <label for="category">Case Category</label>
                                     <select name="category" class="form-control">
                                         <option value="Fraud">Fraud</option>
                                     </select>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label for="description">Case description</label>
+                                    <textarea class="form-control" id="description" rows="7"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -43,17 +41,16 @@
                                 </div>
                                 <div class="form-group col-md-12">
                                     <label for="location">Add location</label>
-                                    <input type="button" class="btn btn-primary form-control" value="Add location">
-                                </div>
-                                <div class="form-group col-md-12">
-                                    <label for="description">Case description</label>
-                                    <textarea class="form-control" id="description" rows="7"></textarea>
+                                    <input type="button" onclick="displayModalMap()" class="btn btn-primary form-control" data-toggle="modal"
+                                        data-target="#locationModal" value="Add location">
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <button class="mx-auto btn btn-primary mt-3" id="submit_Gbtn" style="width: 200px;">Update</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
+{% include "case/map_modal.html" %}

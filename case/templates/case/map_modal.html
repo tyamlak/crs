@@ -1,0 +1,105 @@
+<!-- The Modal -->
+<div class="modal" id="locationModal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="width: 800px; position: fixed; top: 37px; left: -130px;">
+            <div class="modal-header p-1">
+                <button type="button" class="close" data-dismiss="modal" style="display: inherit; margin-left: 95%;" >&times;</button>
+            </div>
+            <div class="modal-body p-0" style="display: inherit;">
+                <div id="mapId" style="width:800px; height: 500px;"></div>
+            </div>
+            <div class="modal-footer p-1">
+                <button class="btn btn-primary p-1" data-dismiss="modal" style="display: inherit; margin-left: 48%; margin-right: 48%;" >Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" name="locations" id="location_input" value="">
+
+<script>
+
+    var markers = []
+    var markerOptions = {
+        clickable: true,
+        draggable: true
+    }
+
+    var redIcon = new L.Icon({
+        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
+        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41]
+    });
+
+    function createMarker(coords) {
+        var id
+        if (markers.length < 1) id = 0
+        else id = markers[markers.length - 1]._id + 1
+        var popupContent = '<button onclick="clearMarker(' + id + ')">Clear Marker</button>';
+        myMarker = L.marker(coords, {
+            draggable: true,
+            icon: redIcon
+        });
+        myMarker._id = id
+        var myPopup = myMarker.bindPopup(popupContent, {
+            closeButton: false
+        });
+        map.addLayer(myMarker)
+        markers.push(myMarker)
+    }
+
+    function clearMarker(id) {
+        console.log(markers)
+        var new_markers = []
+        markers.forEach(function (marker) {
+            if (marker._id == id) map.removeLayer(marker)
+            else new_markers.push(marker)
+        })
+        markers = new_markers
+    }
+
+    function append_location(coord) {
+        var lat = coord.lat
+        var lng = coord.lng
+        l_input = document.getElementById('location_input')
+        if (l_input.value == "") {
+            l_input.value = "" + lat + "," + lng
+        } else {
+            l_input.value += ";" + lat + "," + lng
+        }
+
+    }
+
+    function addMarker(e) {
+        createMarker(e.latlng)
+        append_location(e.latlng)
+        return
+        c_location = e.latlng
+        var marker = L.marker(e.latlng, markerOptions)
+        console.log(location)
+        marker.addTo(map)
+        lat = c_location.lat
+        lng = c_location.lng
+    }
+
+    var mapOptions = {
+        center: [8.9806, 38.7578], // lat,long #A.A [8.9806, 38.7578]
+        zoom: 13
+    }
+
+    var map = new L.map('mapId', mapOptions);
+    var layer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
+    map.addLayer(layer);
+
+    map.on('click', addMarker)
+
+    function displayModalMap() {
+        document.getElementById('locationModal').style.display = 'block';
+        setTimeout(function () {
+            map.invalidateSize();
+        }, 100);
+    }
+
+</script>
