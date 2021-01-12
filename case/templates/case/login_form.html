@@ -1,0 +1,16 @@
+{% load static %}
+<div class="jumbotron w-50 mx-auto" style="width: 150px;">
+	<h2 class="mx-auto" style="width: 150px;">Login</h2>
+	<form method="POST" action="{% if " login" not in request.path %}login{% endif %}" role="form" class="pl-5">
+		{% csrf_token %}
+		<div class="form-group">
+			<label for="username"><span class="glyphicon glyphicon-user"></span> Username</label>
+			<input type="text" name="username" required class="form-control w-75" id="username" placeholder="Enter username">
+		</div>
+		<div class="form-group">
+			<label for="password"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
+			<input type="password" name="password" required class="form-control w-75" id="password" placeholder="Enter password">
+		</div>
+		<input type="submit" value="Login" class="btn btn-default btn-success mx-auto" style="width: 150px;">
+	</form>
+</div>
