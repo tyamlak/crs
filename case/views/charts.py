@@ -55,13 +55,14 @@ class MonthlyCrimeDist(APIView):
     authentication_classes = []
     permission_classes = []
 
-    def get(self,request,year=None,format=None):
+    def get(self,request,format=None):
         label = "Monthly Cases"
-        if not year:
-            year = datetime.utcnow().year
-            label = 'Monthly cases for %d'%year
-        else:
-            label = 'Monthly cases for %d'%year
+        year = datetime.utcnow().year
+        try:
+            year = int(request.GET.get('year'))
+        except Exception as e:
+            print('Error while parsing user input',e)
+        label = 'Number of Monthly cases for %d'%year
         labels = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
         monthly_crimes = []
         all_cases = Case.objects.filter(date_created__year=year)
@@ -85,8 +86,12 @@ class YearlyCrimeDist(APIView):
     def get(self,request,format=None):
         labels = []
         yearly_cases = []
-        for i in range(20):
-            year = 2000 + i
+        current_year = datetime.utcnow().year
+        start_year = int(request.GET.get('from') or (current_year - 4))
+        end_year = int(request.GET.get('to') or current_year)
+        if start_year > end_year:
+            start_year, end_year = end_year, start_year
+        for year in range(start_year,end_year + 1):
             case_count = Case.objects.filter(date_created__year=year).count()
             labels.append(str(year))
             yearly_cases.append(case_count)
@@ -94,7 +99,7 @@ class YearlyCrimeDist(APIView):
             'chart_type':'bar',
             'stat':yearly_cases,
             'labels':labels,
-            'label':'No of Cases from 2000-2020'
+            'label':'Number of Yearly Cases from %d - %d'%(start_year,end_year)
         }
         return Response(data)
 
