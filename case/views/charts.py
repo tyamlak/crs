@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import View
 from case.models import Case
+from case.models import CaseCategory
 from UserProfile.models import Person
 
 from rest_framework.response import Response 
@@ -17,9 +18,15 @@ class CrimeTypeDist(APIView):
     permission_classes = []
 
     def get(self,request,format=None):
-        severe = Case.objects.filter(category='Severe').count()
-        medium = Case.objects.filter(category='Medium').count()
-        light = Case.objects.filter(category='Light').count()
+        cts = CaseCategory.objects.all()
+        severe = medium = light = 0
+        for ct in cts:
+            if ct.crime_type == 'S':
+                severe += ct.case_set.all().count()
+            elif ct.crime_type == 'M':
+                medium += ct.case_set.all().count()
+            elif ct.crime_type == 'L':
+                light += ct.case_set.all().count()
         data = {
             'chart_type': 'bar',
             'stat': [severe,medium,light],
