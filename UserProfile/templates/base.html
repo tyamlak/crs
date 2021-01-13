@@ -72,44 +72,12 @@
 					</ul>
 				</li>
 				{% else %}
-				<li><a class="nav-link" href="" data-toggle="modal" data-target="#loginModal"><span
+				<li><a class="nav-link" href="/" ><span
 							class="glyphicon glyphicon-log-in" style="font-weight:bold"> Login</span> </a></li>
 				{% endif %}
 			</ul>
 		</div>
 	</nav>
-	<div class="modal fade" id="loginModal" role="dialog">
-		<div class="modal-dialog modal-dialog-centered">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title text-primary"><span class="glyphicon glyphicon-lock"></span> Login</h4>
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-				</div>
-				<div class="modal-body">
-					<form method="POST" action="{% if "login" not in request.path %}login{% endif %}" role="form">
-						{% csrf_token %}
-						<div class="form-group">
-							<label for="username"><span class="glyphicon glyphicon-user"></span> Username</label>
-							<input type="text" name="username" class="form-control" id="username"
-								placeholder="Enter username">
-						</div>
-						<div class="form-group">
-							<label for="password"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
-							<input type="password" name="password" class="form-control" id="password"
-								placeholder="Enter password">
-						</div>
-						<input type="submit" value="Login" class="btn btn-default btn-success btn-block">
-					</form>
-				</div>
-				<div class="modal-footer">
-					<button type="submit" value="Connect" class="btn btn-danger ml-2 hid" data-dismiss="modal"><span
-							class="glyphicon glyphicon-remove"></span> Cancel</button>
-					<p class="mx-5">Not a member? <a href="{% url "index" %}">Sign Up</a></p>
-					<p class="mr-5">Forgot <a href="#">Password?</a></p>
-				</div>
-			</div>
-		</div>
-	</div>
 
 	<main class="container-fluid" style="margin: 30px 0px;">
 		{% block content %}{% endblock %}
