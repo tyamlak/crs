@@ -26,8 +26,8 @@ def create_case(request):
 	
 		case = Case()
 		case.description = case_description
+		case.category = crime_type
 		case.save()
-		case.category.add(crime_type)
 		for p_id in assigned_police_list_pk:
 			try:
 				police = Police.objects.get(pk=int(p_id))
