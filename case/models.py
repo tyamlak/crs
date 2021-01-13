@@ -32,7 +32,7 @@ class Case(models.Model):
     criminals = models.ManyToManyField(Criminal)
     plaintiffs = models.ManyToManyField(Plaintiff)
     witness_set = models.ManyToManyField(Witness)
-    category = models.ManyToManyField(CaseCategory)
+    category = models.ForeignKey(CaseCategory,null=True,on_delete=models.SET_NULL)
     description = models.TextField(blank=False)
 
 
