@@ -60,3 +60,7 @@ def search_image(request):
 			return render(request,'case/search_image.html',{'error':'Image Not found in Database.'})
 		return redirect('case-index')
 	return render(request,'case/search_image.html')
+
+
+def search(request):
+	return render(request,'case/search.html')

@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+Search Case
+{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+    integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+<div class="jumbotron">
+    <form action="#" class="mx-auto" style="width: 70%;">
+        <div class="form-group">
+            <label for="search">Search Case </label>
+            <input type="text" class="form-control search w-75" autofocus name="search" placeholder="Abebe Bekele">
+            <span class="fas fa-camera search" onClick="showUpload()" data-toggle="tooltip" title="Search by image"
+                style="position: fixed; top: 29%; left: 63%;"></span>
+        </div>
+        <ul class="nav nav-tabs uploadTab" style="display: none;">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#Searchimage">Search by Image</a>
+            </li>
+        </ul>
+        <div class="tab-content uploadTab" style="display: none;">
+            <button type="button" class="close" onClick="closeBtn()"
+                style="position: fixed; position: fixed; top: 31%;
+                left: 79%;">&times;</button>
+            <div class="tab-pane active" id="Searchimage">
+                <div class="form-group w-75">
+                    <input type="file" class="form-control">
+                </div>
+            </div>
+        </div>
+        <!-- <div class="form-group">
+            Filter:
+            <div class="form-check-inline">
+                <label class="form-check-label">
+                    <input type="radio" checked class="form-check-input" name="filter" value="">None
+                </label>
+            </div>
+            <div class="form-check-inline">
+                <label class="form-check-label">
+                    <input type="radio" class="form-check-input" name="filter" value="">Search for name
+                </label>
+            </div>
+        </div> -->
+        <input type="submit" class="btn btn-primary mt-3" value="Search">
+    </form>
+</div>
+
+<script>
+    function showUpload() {
+        let tab = document.getElementsByClassName('uploadTab');
+        let searchInput = document.getElementsByClassName('search');
+        if (tab[0].style.display === "none") {
+            tab[0].style.display = "block";
+            tab[1].style.display = "block";
+        } else {
+            tab[0].style.display = "none";
+            tab[1].style.display = "none";
+        }
+        if (searchInput[0].style.display === "none") {
+            searchInput[0].style.display = "block";
+            searchInput[1].style.display = "block";
+        } else {
+            searchInput[0].style.display = "none";
+            searchInput[1].style.display = "none";
+        }
+    }
+    function closeBtn() {
+        let tab = document.getElementsByClassName('uploadTab');
+        let searchInput = document.getElementsByClassName('search');
+        tab[0].style.display = "none";
+        tab[1].style.display = "none";
+        searchInput[0].style.display = "block";
+        searchInput[1].style.display = "block";
+    }
+</script>
+
+{% endblock %}
