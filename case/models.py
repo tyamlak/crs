@@ -35,6 +35,17 @@ class Case(models.Model):
     category = models.ForeignKey(CaseCategory,null=True,on_delete=models.SET_NULL)
     description = models.TextField(blank=False)
 
+    @property
+    def get_no_of_criminals(self):
+        return self.criminals.all().count
+
+    @property
+    def get_no_of_witness(self):
+        return self.witness_set.all().count
+
+    @property
+    def get_no_of_plaintiffs(self):
+        return self.plaintiffs.all().count
 
 class CaseType(models.Model):
 
