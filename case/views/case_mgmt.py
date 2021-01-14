@@ -11,6 +11,16 @@ from case.models import CaseFile
 from case.models import Location
 
 
+#@login_required
+def case_list(request):
+	cases = Case.objects.all()
+	return render(
+		request,'case/case_list.html',{
+			'case_set': cases,
+		}
+	)
+
+
 #@login_required # requires(police/data_encoder)decorators
 def create_case(request):
 	error = ''
