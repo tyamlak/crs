@@ -77,3 +77,11 @@ def add_image(request):
 			'image_form':image_form,
 		}
 	)
+
+
+def mock(request):
+	return render(
+		request,'case/mock.html',{
+			
+		}
+	)
