@@ -14,6 +14,7 @@
 		<button class="close" onclick="get_data('crimes')" id="monthly_stats">Severe Stats/</button><br>
 		<button class="close" onclick="get_data('monthly')" id="monthly_stats">Monthly Stats/</button><br>
 		<button class="close" onclick="get_data('yearly')" id="monthly_stats">Yearly Stats/</button><br>
+		<button class="close" onclick="get_data('crime-dist')" id="crime_dist_stats">Crime Stats/</button><br>
 	</div>
 	<div class="chart-container" style="position: relative; height:40vh; width:50vw">
 		<canvas id="myChart" width="" height=""></canvas>
@@ -28,7 +29,7 @@
 			});
 			get_data()
 		});
-		function get_data(api_url='sex_dist'){
+		function get_data(api_url='crime-dist'){
 			var endpoint = '/case/api/' + api_url
 			var crime_stat = []
 			$.ajax({

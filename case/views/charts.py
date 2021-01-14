@@ -35,6 +35,34 @@ class CrimeTypeDist(APIView):
         }
         return Response(data)
 
+
+class CrimeDist(APIView):
+
+    authentication_classes = []
+    permission_classes = []
+
+    def get(self,request,format=None):
+        cts = CaseCategory.objects.all()
+        labels  = []
+        stat = []
+        chart_type = 'bar'
+        year = request.GET.get('year') or None
+        label = 'Number of crimes '
+        for ct in cts:
+            labels.append(ct.crime)
+            if year and year > 0:
+                stat.append(ct.case_set.filter(date_created__year=year).count())
+            else:
+                stat.append(ct.case_set.all().count())
+        data = {
+            'chart_type':chart_type,
+            'stat':stat,
+            'labels':labels,
+            'label':label,
+        }
+        return Response(data)
+
+
 class SexDist(APIView):
 
     authentication_classes = []
@@ -58,14 +86,21 @@ class MonthlyCrimeDist(APIView):
     def get(self,request,format=None):
         label = "Monthly Cases"
         year = datetime.utcnow().year
+        crime_type = None
         try:
             year = int(request.GET.get('year'))
         except Exception as e:
             print('Error while parsing user input',e)
+        try:
+            crime_type = int(request.GET.get('crime_type')) or None
+        except Exception as e:
+            print('Error while parsing request for [crime_type]',e)
         label = 'Number of Monthly cases for %d'%year
         labels = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
         monthly_crimes = []
         all_cases = Case.objects.filter(date_created__year=year)
+        if (isinstance(crime_type,int))  and (crime_type > 0):
+            all_cases = all_cases.filter(category=crime_type)
         for i in range(1,13):
             crime_count = all_cases.filter(date_created__month=i).count()
             monthly_crimes.append(crime_count)
@@ -87,12 +122,20 @@ class YearlyCrimeDist(APIView):
         labels = []
         yearly_cases = []
         current_year = datetime.utcnow().year
+        crime_type = None
         start_year = int(request.GET.get('from') or (current_year - 4))
         end_year = int(request.GET.get('to') or current_year)
         if start_year > end_year:
             start_year, end_year = end_year, start_year
+        try:
+            crime_type = int(request.GET.get('crime_type')) or None
+        except Exception as e:
+            print('Error while parsing request for [crime_type]',e)
         for year in range(start_year,end_year + 1):
-            case_count = Case.objects.filter(date_created__year=year).count()
+            if (not crime_type) or (crime_type <= 0):
+                case_count = Case.objects.filter(date_created__year=year).count()
+            else:
+                case_count = Case.objects.filter(date_created__year=year,category=crime_type).count()
             labels.append(str(year))
             yearly_cases.append(case_count)
         data = {
@@ -105,4 +148,4 @@ class YearlyCrimeDist(APIView):
 
 
 
-__all__ = ['HomeView','CrimeTypeDist','SexDist','MonthlyCrimeDist','YearlyCrimeDist']
+__all__ = ['HomeView','CrimeTypeDist','SexDist','MonthlyCrimeDist','YearlyCrimeDist','CrimeDist']
