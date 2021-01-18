@@ -49,7 +49,7 @@ def criminal_detail(request,pk):
 	ob = Criminal.objects.get(pk=pk)
 	images = ob.images.all()
 	image_url = '' # url(static) of Null image
-	if len(images) >= 0:
+	if len(images) > 0:
 		image_url = images[0].image.url 
 	return render(
 		request,'case/criminal_detail.html',{
