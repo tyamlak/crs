@@ -188,7 +188,7 @@ def add_plaintiff_to_case(request,pk):
 		person.save()
 		plaintiff = Plaintiff(profile=person)
 		plaintiff.save()
-		case.plaintiff.add(plaintiff)
+		case.plaintiffs.add(plaintiff)
 		print('Adding plaintiff to case with pk ',pk)
 		return redirect('manage-case',pk)
 
