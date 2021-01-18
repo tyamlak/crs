@@ -33,6 +33,7 @@ def create_case(request):
 		crime_type = CaseCategory.objects.get(pk=int(crime_type_pk))
 		location_string = request.POST.get('locations')
 		locations = location_string.split(';')
+		locations.remove('')
 	
 		case = Case()
 		case.description = case_description

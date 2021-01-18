@@ -54,8 +54,17 @@
         console.log(markers)
         var new_markers = []
         markers.forEach(function (marker) {
-            if (marker._id == id) map.removeLayer(marker)
-            else new_markers.push(marker)
+            console.log(marker)
+            if (marker._id == id){ 
+                map.removeLayer(marker)
+                location_string = "" + marker._latlng.lat + "," + marker._latlng.lng
+                l_input = document.getElementById('location_input')
+                l_input.value = l_input.value.replace(location_string,"")
+                console.log(l_input.value)
+            }
+            else { 
+                new_markers.push(marker)
+            }
         })
         markers = new_markers
     }
@@ -69,7 +78,7 @@
         } else {
             l_input.value += ";" + lat + "," + lng
         }
-
+        console.log(l_input.value)
     }
 
     function addMarker(e) {
