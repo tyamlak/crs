@@ -1,7 +1,7 @@
 {% load static %}
 <div class="jumbotron w-50 mx-auto" style="width: 150px;">
 	<h2 class="mx-auto" style="width: 150px;">Login</h2>
-	<form method="POST" action="{% if " login" not in request.path %}login{% endif %}" role="form" class="pl-5">
+	<form method="POST" action="" role="form" class="pl-5">
 		{% csrf_token %}
 		<div class="form-group">
 			<label for="username"><span class="glyphicon glyphicon-user"></span> Username</label>

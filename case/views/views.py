@@ -40,11 +40,10 @@ def map_dist(request):
 
 @log_activity
 def index(request,message=None):
-	return render(
-		request,'case/index.html',{
-			'login_required':False
-		}
-	)
+	from django.contrib.auth import get_user
+	if not get_user(request).is_anonymous:
+		return redirect('case-list')
+	return redirect('login')
 
 def criminal_detail(request,pk):
 	ob = Criminal.objects.get(pk=pk)
