@@ -65,6 +65,7 @@ class CriminalImage(models.Model):
         return f'criminal-id-{self.criminal.get_pk}/images/{file_name}'
     criminal = models.ForeignKey(Criminal,on_delete=models.CASCADE,related_name='images')
     image = models.FileField(upload_to=upload_location) # change to Image field with pillow
+    has_face = models.BooleanField(default=False)
 
 class ImageEncoding(models.Model):
 
@@ -81,6 +82,21 @@ class Witness(models.Model):
 
 class Police(models.Model):
     profile = models.OneToOneField(User,primary_key=True,on_delete=models.CASCADE)
+
+    def __str__(self):
+        full_name = self.profile.get_full_name()
+        if full_name:
+            return full_name
+        else:
+            return self.profile.username
+
+    @property
+    def lastlogin(self):
+        return self.profile.last_login
+
+    @property
+    def username(self):
+        return self.profile.username
 
 class DataEncoder(models.Model):
     profile = models.OneToOneField(User,primary_key=True,on_delete=models.CASCADE)
