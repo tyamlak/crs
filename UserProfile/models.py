@@ -100,3 +100,18 @@ class Police(models.Model):
 
 class DataEncoder(models.Model):
     profile = models.OneToOneField(User,primary_key=True,on_delete=models.CASCADE)
+
+    def __str__(self):
+        full_name = self.profile.get_full_name()
+        if full_name:
+            return full_name
+        else:
+            return self.profile.username
+
+    @property
+    def lastlogin(self):
+        return self.profile.last_login
+
+    @property
+    def username(self):
+        return self.profile.username

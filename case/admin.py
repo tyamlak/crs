@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.admin import UserAdmin
 
 from UserProfile.models import Police
+from UserProfile.models import DataEncoder
 
 admin.site.register((CaseCategory,))
 admin.site.unregister((Group,))
@@ -29,10 +30,25 @@ class PoliceAdmin(admin.ModelAdmin):
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == 'profile':
-            query_set = User.objects.filter(is_staff=False,police=None)
+            query_set = User.objects.filter(is_staff=False,police=None,dataencoder=None)
             kwargs['queryset'] = query_set
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
 
 admin.site.unregister((User,))
 admin.site.register(User,CustomUserAdmin)
+
+admin.site.unregister((DataEncoder,))
+
+@admin.register(DataEncoder)
+class DataEncoderAdmin(admin.ModelAdmin):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.list_display += ('username','lastlogin',)
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == 'profile':
+            query_set = User.objects.filter(is_staff=False,police=None,dataencoder=None)
+            kwargs['queryset'] = query_set
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
