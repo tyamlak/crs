@@ -22,7 +22,10 @@ Case List
         </button>
         <button type="button" class="btn disabled">
             Number of Plaintiffs <span class="badge badge-light">{{ case.get_no_of_plaintiffs }}</span>
-          </button>
+        </button>
+        <div class="clearfix">
+            <span class="float-left mt-3"><b><em>Case Closed/Open</em></b></span>
+        </div>
     </div>
 </div>
 {% endfor %}
