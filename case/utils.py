@@ -2,6 +2,10 @@ from django.contrib.auth import get_user
 from case.models import ActivityLog
 from datetime import datetime 
 
+# import face_recognition
+from UserProfile.models import CriminalImage, ImageEncoding
+import pickle
+
 
 class Base(object):
 	def __init__(self,func):

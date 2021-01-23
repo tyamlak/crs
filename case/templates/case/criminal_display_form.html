@@ -6,8 +6,7 @@
             <h4>Criminal Form</h4>
             <div class="form-row">
                 <form method="POST" enctype="multipart/form-data">
-                    <div class="row ml-2">
-                        <div class="form-group card text-center col-3" id="upload-photo"
+                    <div class="form-group card text-center col-3 ml-4" id="upload-photo"
                             style="width:12rem;height: 12rem;">
                             <label for="C_photo-file" class="card-title">
                                 <div class="card-img-overlay" style="cursor: pointer;">
@@ -19,6 +18,8 @@
                                 </div>
                             </label>
                         </div>
+                    <div class="row ml-1">
+                        
                         <div class="col-9">
                             <div class="row">
                                 <div class="col">
@@ -40,15 +41,11 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="sex">Sex</label>
-                                    <select name="sex" disabled class="form-control">
-                                        <option>
-                                            {% if person.sex == 'M' %}
-                                            Male
-                                            {% else %}
-                                            Female
-                                            {% endif %}
-                                        </option>
-                                    </select>
+                                    {% if person.sex == 'M' %}
+                                    <input type="text" name="sex" class="form-control" disabled="true" id="sex" value="Male">
+                                    {% else %}
+                                    <input type="text" name="sex" class="form-control" disabled="true" id="sex" value="Female">
+                                    {% endif %}
                                 </div>
                                 <div class="col-md-6">
                                     <label for="age">Age</label>
