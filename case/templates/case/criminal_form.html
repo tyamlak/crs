@@ -8,7 +8,7 @@
                 <form method="POST" action="/case/{{case_no}}/add-criminal" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="row ml-2">
-                        <div class="form-group card text-center col-3" id="upload-photo"
+                        <div class="form-group card text-center col-2" id="upload-photo"
                             style="width:12rem;height: 12rem;">
                             <label for="C_photo-file" class="card-title">
                                 <div class="card-img-overlay" style="cursor: pointer;">
@@ -20,7 +20,7 @@
                                 </div>
                             </label>
                         </div>
-                        <div class="col-9">
+                        <div class="col-6">
                             <div class="row">
                                 <div class="col">
                                     <label for="fname">First Name</label>
@@ -327,19 +327,20 @@
                                     <input type="text" name="work_address" class="form-control" id="C_address">
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="form-group col">
-                                    <label for="C_testimony_file">Testimony File/Files</label>
-                                    <input type="file" name="testimony_file" multiple class="form-control" id="C_testimony_file">
-                                </div>
-                                <div class="form-group col">
-                                    <label for="C_testimony">Criminal Testimony</label>
-                                    <textarea class="form-control" rows="5" id="C_testimony"></textarea>
-                                </div>
-                            </div>
+                            
 
                             <button class="mx-auto btn btn-primary mt-3" id="submit_Cbtn"
                                 style="width: 200px;">Submit</button>
+                        </div>
+                        <div class="col">
+                            <div class="form-group col">
+                                <label for="C_testimony_file">Testimony File/Files</label>
+                                <input type="file" name="testimony_file" multiple class="form-control" id="C_testimony_file">
+                            </div>
+                            <div class="form-group col">
+                                <label for="C_testimony">Criminal Testimony</label>
+                                <textarea class="form-control" rows="5" id="C_testimony"></textarea>
+                            </div>
                         </div>
                     </div>
                 </form>
@@ -358,7 +359,7 @@
         reader.addEventListener("load", function () {
             // convert image file to base64 string
             preview.src = reader.result;
-            preview.style = "width:8rem;height:6rem";
+            preview.style = "width:10rem;height:8rem";
         }, false);
 
         if (file) {
