@@ -29,4 +29,26 @@ Case List
     </div>
 </div>
 {% endfor %}
+
+<ul class="pagination pagination-lg justify-content-center" style="margin:20px 0;">
+
+    {% if case_set.has_previous %}
+    <li class="page-item"><a class="page-link" href="?page=1">&laquo; first</a></li>
+    <li class="page-item"><a class="page-link"
+            href="?page={{ case_set.previous_page_number }}">previous</a></li>
+    {% endif %}
+
+    <li class="current page-item disabled">
+        <a class="page-link"> Page {{ case_set.number }} of {{ case_set.paginator.num_pages }}.</a>
+    </li>
+
+    {% if case_set.has_next %}
+    <li class="page-item"><a class="page-link" href="?page={{ case_set.next_page_number }}">next</a>
+    </li>
+    <li class="page-item"><a class="page-link" href="?page={{ case_set.paginator.num_pages }}">last
+            &raquo;</a></li>
+    {% endif %}
+
+</ul>
+
 {% endblock %}

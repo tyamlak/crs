@@ -11,14 +11,20 @@ from case.models import CaseFile
 from case.models import Location
 
 from django.contrib.auth import get_user
+from django.core.paginator import Paginator
 
+
+RESULTS_PER_PAGE = 10
 
 #@login_required
 def case_list(request):
 	cases = Case.objects.all()
+	paginator = Paginator(cases,RESULTS_PER_PAGE)
+	page = request.GET.get('page')
+	results = paginator.get_page(page)
 	return render(
 		request,'case/case_list.html',{
-			'case_set': cases,
+			'case_set': results,
 		}
 	)
 
