@@ -9,7 +9,7 @@ Case List
 <div class="card w-50 mx-auto mb-2 shadow-sm" style="width:150px">
     <div class="card-body">
         <div class="clearfix">
-            <h5 class="float-left card-title">Created by: Abebe Bekele</h5>
+            <h5 class="float-left card-title">Created by: {{ case.get_creator_instance }} </h5>
             <span class="float-right"><em>{{ case.date_created }}</em></span>
         </div>
         <p class="card-text"><em><b>{{ case.category.crime }}</b></em></p>

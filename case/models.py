@@ -1,6 +1,7 @@
 from django.db import models
-from UserProfile.models import Police, Criminal, Plaintiff, Witness
+from UserProfile.models import Police, Criminal, Plaintiff, Witness , DataEncoder
 from datetime import datetime
+from django.contrib.auth.models import User
 
 
 class CaseCategory(models.Model):
@@ -34,6 +35,7 @@ class Case(models.Model):
     witness_set = models.ManyToManyField(Witness)
     category = models.ForeignKey(CaseCategory,null=True,on_delete=models.SET_NULL)
     description = models.TextField(blank=False)
+    created_by = models.PositiveIntegerField(blank=False,default=0)
 
     @property
     def get_no_of_criminals(self):
@@ -46,6 +48,31 @@ class Case(models.Model):
     @property
     def get_no_of_plaintiffs(self):
         return self.plaintiffs.all().count
+
+    @property
+    def get_creator_instance(self):
+        user = 'AnonymousUser'
+        police = None
+        data_encoder = None
+        if self.created_by == 0:
+            return user
+        try: 
+            user = User.objects.get(pk=self.created_by)
+        except Exception as E:
+            print('[Error]: Case Creator with id, ' + str(self.created_by) + 'has been deleted.')
+            return user
+        if not isinstance(user,str):
+            try:
+                police = Police.objects.get(profile=user)
+                return police
+            except Exception as e:
+                print('Profile is not police.')
+            try:
+                data_encoder = DataEncoder.objects.get(profile=user)
+                return data_encoder
+            except Exception as e:
+                print('Profile is not DataEncoder')
+        return user 
 
 class CaseType(models.Model):
 
