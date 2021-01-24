@@ -216,7 +216,7 @@ def add_criminal_to_case(request,pk):
 			c_image.save()
 		case.criminals.add(criminal)
 		print('Adding criminal to case with pk ',pk)
-		return redirect('edit',pk)
+		return redirect('edit-case',pk)
 
 
 def add_plaintiff_to_case(request,pk):
