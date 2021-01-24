@@ -110,6 +110,10 @@ class Police(models.Model):
     def username(self):
         return self.profile.username
 
+    @property
+    def full_name(self):
+        return self.__str__(self)
+
 class DataEncoder(models.Model):
     profile = models.OneToOneField(User,primary_key=True,on_delete=models.CASCADE)
 
