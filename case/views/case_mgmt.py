@@ -68,7 +68,7 @@ def create_case(request):
 		crime_type_pk = request.POST.get('crime_type')
 		crime_type = CaseCategory.objects.get(pk=int(crime_type_pk))
 		location_string = request.POST.get('locations')
-		for lv in locations:
+		for lv in location_string:
 			if lv == '':
 				locations.remove('')
 	
