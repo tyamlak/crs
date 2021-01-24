@@ -42,10 +42,12 @@ def case_detail(request,pk):
 	criminals = case.criminals.all()
 	plaintiff_set = case.plaintiffs.all()
 	witness_set = case.witness_set.all()
+	police_set = case.police_set.all()
 	return render(request,'case/case_detail.html',{
 		'case':case,'criminals':criminals,
 		'plaintiff_set': plaintiff_set,
 		'witness_set': witness_set,
+		'police_set': police_set,
 	}
 	)
 
