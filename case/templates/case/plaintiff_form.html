@@ -12,15 +12,15 @@
                             <div class="row">
                                 <div class="col">
                                     <label for="fname">First Name</label>
-                                    <input type="text" name="fname" class="form-control" id="P_fname" required pattern="[a-zA-z]$">
+                                    <input type="text" name="fname" class="form-control" id="P_fname" required pattern="[a-zA-Z]+$">
                                 </div>
                                 <div class="col">
                                     <label for="mname">Middle Name</label>
-                                    <input type="text" name="mname" class="form-control" id="P_mname" required pattern="[a-zA-z]$">
+                                    <input type="text" name="mname" class="form-control" id="P_mname" required pattern="[a-zA-Z]+$">
                                 </div>
                                 <div class="col">
                                     <label for="lname">Last Name</label>
-                                    <input type="text" name="lname" class="form-control" id="P_lname" required pattern="[a-zA-z]$">
+                                    <input type="text" name="lname" class="form-control" id="P_lname" required pattern="[a-zA-Z]+$">
                                 </div>
                             </div>
                             <div class="row">
@@ -336,3 +336,6 @@
         </div>
     </div>
 </div>
+<script>
+    document.getElementById('P_date_of_birth').max = new Date().toJSON().split('T')[0];
+</script>

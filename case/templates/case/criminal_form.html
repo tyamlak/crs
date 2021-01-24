@@ -348,6 +348,7 @@
     </div>
 </div>
 <script>
+    document.getElementById('C_date_of_birth').max = new Date().toJSON().split('T')[0];
     function add_image(event) {
         let preview = document.getElementById(`${event.target.id}photo`);
         let file = document.getElementById('C_photo-file').files[0];
