@@ -10,6 +10,8 @@ from case.models import CaseCategory
 from case.models import CaseFile
 from case.models import Location
 
+from django.contrib.auth import get_user
+
 
 #@login_required
 def case_list(request):
@@ -25,7 +27,13 @@ def case_list(request):
 def create_case(request):
 	error = ''
 	if request.POST:
-		error = ''
+		created_by_id = 0
+		created_by = get_user(request)
+		if created_by.is_anonymous:
+			error = 'User Not Authenticated'
+			return redirect('login')
+		else:
+			created_by_id = created_by.pk
 		case_description = request.POST.get('case_description')
 		evidence_files = request.FILES.getlist('evidence')
 		assigned_police_list_pk = request.POST.getlist('allowed_polices')
@@ -50,7 +58,9 @@ def create_case(request):
 			CaseFile(case=case,file=f).save()
 		for ls in locations:
 			lat, lng = ls.split(',')
-			Location(lat=lat,lng=lng,case=case).save()		
+			Location(lat=lat,lng=lng,case=case).save()	
+		case.created_by = created_by_id
+		case.save()	
 
 		return redirect('edit-case',case.pk)
 	case_types = CaseCategory.objects.all()
