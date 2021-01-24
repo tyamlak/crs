@@ -184,6 +184,7 @@ def add_criminal_to_case(request,pk):
 		work_type = request.POST.get('work_type')
 		work_address = request.POST.get('work_address')
 		photo = request.FILES.get('photo')
+		testimony = request.POST.get('testimony')
 
 		work = Work(
 			salary=salary,role=work_role,
@@ -208,13 +209,14 @@ def add_criminal_to_case(request,pk):
 		)
 		person.save()
 		criminal = Criminal(profile=person)
+		criminal.testimony = testimony
 		criminal.save()
 		if photo:
 			c_image = CriminalImage(criminal=criminal,image=photo)
 			c_image.save()
 		case.criminals.add(criminal)
 		print('Adding criminal to case with pk ',pk)
-		return redirect('criminal',criminal.pk)
+		return redirect('edit',pk)
 
 
 def add_plaintiff_to_case(request,pk):
@@ -241,6 +243,7 @@ def add_plaintiff_to_case(request,pk):
 		work_role = request.POST.get('work_role')
 		work_type = request.POST.get('work_type')
 		work_address = request.POST.get('work_address')
+		testimony = request.POST.get('testimony')
 
 		work = Work(
 			salary=salary,role=work_role,
@@ -265,10 +268,11 @@ def add_plaintiff_to_case(request,pk):
 		)
 		person.save()
 		plaintiff = Plaintiff(profile=person)
+		plaintiff.testimony = testimony
 		plaintiff.save()
 		case.plaintiffs.add(plaintiff)
 		print('Adding plaintiff to case with pk ',pk)
-		return redirect('manage-case',pk)
+		return redirect('edit-case',pk)
 
 
 def add_witness_to_case(request,pk):
@@ -324,4 +328,4 @@ def add_witness_to_case(request,pk):
 		witness.save()
 		case.witness_set.add(witness)
 		print('Adding witness to case with pk ',pk)
-		return redirect('manage-case',pk)
+		return redirect('edit-case',pk)
