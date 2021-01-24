@@ -92,6 +92,8 @@ def edit_case(request,pk):
 		case.description = case_description
 		case.category = crime_type
 		case.save()
+		for p in case.police_set.all():
+			case.police_set.remove(p)
 		for p_id in assigned_police_list_pk:
 			try:
 				police = Police.objects.get(pk=int(p_id))
@@ -115,6 +117,7 @@ def edit_case(request,pk):
 	return render(request,'case/edit_case.html',{
 		'case_no':pk,'case':case, 'all_case_types': all_case_types,
 		'current_case_type':current_case_type,'police_list':police_set,
+		'allowed_police_set':allowed_police_set,
 	})
 	
 
