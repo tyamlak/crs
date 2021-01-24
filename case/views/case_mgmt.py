@@ -28,6 +28,13 @@ def case_list(request):
 		}
 	)
 
+#@login_required
+def case_detail(request,pk):
+	case = Case.objects.get(pk=pk)
+	return render(request,'case/case_detail.html',{
+		'case':case,
+	}
+	)
 
 #@login_required # requires(police/data_encoder)decorators
 def create_case(request):
