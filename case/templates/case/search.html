@@ -9,29 +9,37 @@ Search Case
     integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
 <div class="jumbotron">
-    <form action="#" class="mx-auto" style="width: 70%;">
+    <form action="/case/imgsearch" method="POST" enctype="multipart/form-data" class="mx-auto" style="width: 70%;">
+        {% csrf_token %}
         <div class="form-group">
             <label for="search">Search Case </label>
-            <input type="text" class="form-control search w-75" autofocus name="search" placeholder="Abebe Bekele">
-            <span class="fas fa-camera search" onClick="showUpload()" data-toggle="tooltip" title="Search by image"
-                style="position: fixed; top: 29%; left: 63%;"></span>
+            <ul class="list-group search">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <input type="text" class="form-control search" autofocus name="search" placeholder="Abebe Bekele">
+                    <span class="fas fa-camera search badge-pill" onClick="showUpload()" data-toggle="tooltip"
+                        title="Search by image"></span>
+                </li>
+            </ul>
+
         </div>
         <ul class="nav nav-tabs uploadTab" style="display: none;">
-            <li class="nav-item">
-                <a class="nav-link active" data-toggle="tab" href="#Searchimage">Search by Image</a>
-            </li>
-        </ul>
-        <div class="tab-content uploadTab" style="display: none;">
-            <button type="button" class="close" onClick="closeBtn()"
-                style="position: fixed; position: fixed; top: 31%;
-                left: 79%;">&times;</button>
+            <ul class="list-group search">
+                <div class="tab-content uploadTab" style="display: none;">
+                    <li class="list-group-item d-flex justify-content-between align-items-center nav-item">
+                        <a class="active disabled" data-toggle="tab">Search by Image</a>
+                        <button type="button" class="close badge-pill ml-1" onClick="closeBtn()">&times;</button>
+                    </li>
+            </ul>
             <div class="tab-pane active" id="Searchimage">
                 <div class="form-group w-75">
                     <input type="file" class="form-control">
                 </div>
             </div>
-        </div>
-        <!-- <div class="form-group">
+        </ul>
+
+        <input type="submit" class="btn btn-primary mt-3" value="Search">
+</div>
+<!-- <div class="form-group">
             Filter:
             <div class="form-check-inline">
                 <label class="form-check-label">
@@ -44,8 +52,7 @@ Search Case
                 </label>
             </div>
         </div> -->
-        <input type="submit" class="btn btn-primary mt-3" value="Search">
-    </form>
+</form>
 </div>
 
 <script>
