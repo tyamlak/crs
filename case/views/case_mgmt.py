@@ -19,6 +19,10 @@ RESULTS_PER_PAGE = 10
 #@login_required
 def case_list(request):
 	cases = Case.objects.all()
+	crime_type_pk = request.POST.get('crime_type_pk')
+	crime_type = int(crime_type_pk)
+	if isinstance(crime_type,int):
+		cases = cases.filer(category=crime_type)
 	paginator = Paginator(cases,RESULTS_PER_PAGE)
 	page = request.GET.get('page')
 	results = paginator.get_page(page)
@@ -31,8 +35,13 @@ def case_list(request):
 #@login_required
 def case_detail(request,pk):
 	case = Case.objects.get(pk=pk)
+	criminals = case.criminals.all()
+	plaintiff_set = case.plaintiffs.all()
+	witness_set = case.witness_set.all()
 	return render(request,'case/case_detail.html',{
-		'case':case,
+		'case':case,'criminals':criminals,
+		'plaintiff_set': plaintiff_set,
+		'witness_set': witness_set,
 	}
 	)
 
