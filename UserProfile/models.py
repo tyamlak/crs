@@ -80,9 +80,17 @@ class Plaintiff(models.Model):
     profile = models.OneToOneField(Person,primary_key=True,on_delete=models.CASCADE)
     testimony = models.TextField(blank=False)
 
+    @property
+    def full_name(self):
+        return f'{self.profile.first_name} {self.profile.middle_name} {self.profile.last_name}'
+
 class Witness(models.Model):
     profile = models.OneToOneField(Person,primary_key=True,on_delete=models.CASCADE)
     testimony = models.TextField(blank=False)
+
+    @property
+    def full_name(self):
+        return f'{self.profile.first_name} {self.profile.middle_name} {self.profile.last_name}'
 
 class Police(models.Model):
     profile = models.OneToOneField(User,primary_key=True,on_delete=models.CASCADE)
