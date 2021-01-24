@@ -8,8 +8,13 @@
 	<title>
 		{% block title %}{% endblock %}
 	</title>
-	<link href="{% static "css/bootstrap4.min.css" %}" rel="stylesheet" type="text/css">
+	<!-- <link href="{% static "css/bootstrap4.min.css" %}" rel="stylesheet" type="text/css"> -->
 	<link href="{% static "css/styles2.css" %}" rel="stylesheet" type="text/css">
+
+	
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
 	{% block head %}{% endblock %}
 </head>
 
@@ -87,8 +92,12 @@
 		&copy; {% now "Y" %} Criminal Recording System.
 	</footer>
 	<script src="{% static "js/script.js" %}"></script>
-	<script src="{% static "js/lib/jquery-2.1.4.min.js" %}"></script>
-	<script src="{% static "js/lib/bootstrap4.min.js" %}"></script>
+	<!-- <script src="{% static "js/lib/jquery-2.1.4.min.js" %}"></script>
+	<script src="{% static "js/lib/bootstrap4.min.js" %}"></script> -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
 	{% block scripts %}{% endblock %}
 	{% if error %}
 	<script>

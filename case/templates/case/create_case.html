@@ -18,10 +18,11 @@ Add new case
             <div class="col">
                 <div class="row">
                     <div class="col">
-                        <label for="fname">Assigned police</label>
-                        <select class="form-container form-control" name="allowed_polices" id="police" required>
+                        <label for="police">Assigned police</label>
+                        <select multiple data-style="bg-white rounded-pill px-4 py-3 shadow-sm" title="Assign Police"
+                            class="form-control selectpicker w-100" name="police" id="police" data-live-search="true">
                             {% for p in police_list %}
-                                <option value="{{ p.pk }}">{{ p }}</option>
+                            <option value="{{ p.pk }}">{{ p }}</option>
                             {% endfor %}
                         </select>
                     </div>
@@ -31,7 +32,7 @@ Add new case
                         <label for="severity">Crime Type</label>
                         <select class="form-container form-control" name="crime_type" id="severity" required>
                             {% for ct in case_types %}
-                                <option value="{{ ct.pk }}">{{ ct.crime }}</option>
+                            <option value="{{ ct.pk }}">{{ ct.crime }}</option>
                             {% endfor %}
                         </select>
                     </div>
@@ -55,10 +56,10 @@ Add new case
                     </div>
                     <div class="form-group col-md-12">
                         <label for="location">Add location</label>
-                        <input type="button" onclick="displayModalMap()" class="btn btn-primary form-control" data-toggle="modal"
-                            data-target="#locationModal" value="Add location">
+                        <input type="button" onclick="displayModalMap()" class="btn btn-primary form-control"
+                            data-toggle="modal" data-target="#locationModal" value="Add location">
                     </div>
-                    
+
                 </div>
             </div>
         </div>
