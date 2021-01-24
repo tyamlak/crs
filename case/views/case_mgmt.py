@@ -40,8 +40,9 @@ def create_case(request):
 		crime_type_pk = request.POST.get('crime_type')
 		crime_type = CaseCategory.objects.get(pk=int(crime_type_pk))
 		location_string = request.POST.get('locations')
-		locations = location_string.split(';')
-		locations.remove('')
+		for lv in locations:
+			if lv == '':
+				locations.remove('')
 	
 		case = Case()
 		case.description = case_description
@@ -75,9 +76,45 @@ def create_case(request):
 
 def edit_case(request,pk):
 	if request.POST:
-		pass
+		case = Case.objects.get(pk=pk)
+
+		case_description = request.POST.get('case_description')
+		evidence_files = request.FILES.getlist('evidence')
+		assigned_police_list_pk = request.POST.getlist('allowed_polices')
+		crime_type_pk = request.POST.get('crime_type')
+		crime_type = CaseCategory.objects.get(pk=int(crime_type_pk))
+		location_string = request.POST.get('locations')
+		locations = location_string.split(';')
+		for lv in locations:
+			if lv == '':
+				locations.remove('')
+
+		case.description = case_description
+		case.category = crime_type
+		case.save()
+		for p_id in assigned_police_list_pk:
+			try:
+				police = Police.objects.get(pk=int(p_id))
+			except Exception as e:
+				print('[ERORR]: ',e)
+				continue
+			case.police_set.add(police)
+		for f in evidence_files:
+			CaseFile(case=case,file=f).save()
+		for ls in locations:
+			lat, lng = ls.split(',')
+			Location(lat=lat,lng=lng,case=case).save()
+		case.save()
+		return redirect('edit-case',pk)
+
+	case = Case.objects.get(pk=pk)
+	current_case_type = case.category.crime
+	police_set = Police.objects.all()
+	allowed_police_set = case.police_set.all()
+	all_case_types = CaseCategory.objects.all()
 	return render(request,'case/edit_case.html',{
-		'case_no':pk,
+		'case_no':pk,'case':case, 'all_case_types': all_case_types,
+		'current_case_type':current_case_type,'police_list':police_set,
 	})
 	
 
