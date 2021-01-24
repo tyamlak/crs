@@ -7,29 +7,32 @@
         <div class="card-body">
             <h4>General Form</h4>
             <div class="form-row">
-                <form method="POST" enctype="multipart/form-data">
+                <form method="POST" action="/case/edit/{{case_no}}" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="row ml-2">
                         <div class="col">
                             <div class="row">
                                 <div class="col">
                                     <label for="fname">Assigned police</label>
-                                    <select class="form-container form-control" name="police" id="police" required>
-                                        <option value="">Abebe</option>
-                                        <option value="">Bekele</option>
+                                    <select class="form-container form-control" name="allowed_polices" id="police" required>
+                                        {% for p in police_list %}
+                                            <option value="{{ p.pk }}">{{ p }}</option>
+                                        {% endfor %}
                                     </select>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12 my-2">
-                                    <label for="category">Case Category</label>
-                                    <select name="category" class="form-control" required>
-                                        <option value="Fraud">Fraud</option>
+                                    <label for="severity">Crime Type</label>
+                                    <select class="form-container form-control" name="crime_type" id="severity" required>
+                                        {% for ct in all_case_types %}
+                                            <option {% if current_case_type == ct.crime %} selected {% endif %}value="{{ ct.pk }}">{{ ct.crime }}</option>
+                                        {% endfor %}
                                     </select>
                                 </div>
-                                <div class="form-group col-md-12">
+                                <div class="form-group col-md-12 my-2">
                                     <label for="description">Case description</label>
-                                    <textarea class="form-control" id="description" rows="7"></textarea>
+                                    <textarea class="form-control" id="description" name="case_description" rows="7">{{ case.description }}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -44,13 +47,14 @@
                                     <input type="button" onclick="displayModalMap()" class="btn btn-primary form-control" data-toggle="modal"
                                         data-target="#locationModal" value="Add location">
                                 </div>
+                                
                             </div>
                         </div>
                     </div>
-                    <button class="mx-auto btn btn-primary mt-3" id="submit_Gbtn" style="width: 200px;">Update</button>
+                    <button class="mx-auto btn btn-primary mt-3" id="submit_Cbtn" style="width: 200px;">Submit</button>
+                    {% include "case/map_modal.html" %}
                 </form>
             </div>
         </div>
     </div>
 </div>
-{% include "case/map_modal.html" %}
