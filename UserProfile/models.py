@@ -57,7 +57,7 @@ class Criminal(models.Model):
 
     @property
     def full_name(self):
-        return self.profile.first_name + self.profile.middle_name + self.profile.last_name
+        return f'{self.profile.first_name} {self.profile.middle_name} {self.profile.last_name}'
 
     @property
     def get_pk(self):
