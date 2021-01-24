@@ -12,29 +12,32 @@
                             <div class="row">
                                 <div class="col">
                                     <label for="fname">First Name</label>
-                                    <input type="text" name="fname" class="form-control" id="P_fname" required pattern="[a-zA-Z]+$">
+                                    <input type="text" name="fname" class="form-control" id="P_fname" required
+                                        pattern="[a-zA-Z]+$">
                                 </div>
                                 <div class="col">
                                     <label for="mname">Middle Name</label>
-                                    <input type="text" name="mname" class="form-control" id="P_mname" required pattern="[a-zA-Z]+$">
+                                    <input type="text" name="mname" class="form-control" id="P_mname" required
+                                        pattern="[a-zA-Z]+$">
                                 </div>
                                 <div class="col">
                                     <label for="lname">Last Name</label>
-                                    <input type="text" name="lname" class="form-control" id="P_lname" required pattern="[a-zA-Z]+$">
+                                    <input type="text" name="lname" class="form-control" id="P_lname" required
+                                        pattern="[a-zA-Z]+$">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="sex">Sex</label>
                                     <select name="sex" id="P_sex" class="form-control" required>
-                                        <option></option>
-                                        <option>Male</option>
-                                        <option>Female</option>
+                                        <option value="M">Male</option>
+                                        <option value="F">Female</option>
                                     </select>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="age">Age</label>
-                                    <input type="number" name="age" min="0" max="125" class="form-control" id="P_age" required>
+                                    <input type="number" name="age" min="0" max="125" class="form-control" id="P_age"
+                                        required>
                                 </div>
                             </div>
                             <div class="row">
@@ -50,7 +53,7 @@
                             <div class="row">
                                 <div class="col">
                                     <label for="nationality">Nationality</label>
-                                    <select class="form-control dropdown" id="nationality" name="nationality" required>
+                                    <select class="form-control dropdown" id="P_nationality" name="nationality" required>
                                         <option value="ethiopian">Ethiopian</option>
                                         <option value="afghan">Afghan</option>
                                         <option value="albanian">Albanian</option>
@@ -243,7 +246,7 @@
                                         <option value="yemenite">Yemenite</option>
                                         <option value="zambian">Zambian</option>
                                         <option value="zimbabwean">Zimbabwean</option>
-                                      </select>
+                                    </select>
                                 </div>
                                 <div class="col">
                                     <label for="ethnicity">Ethnicity</label>
@@ -252,7 +255,8 @@
                                 <div class="col">
                                     <label for="religion">Religion</label>
                                     <select class="form-control dropdown" id="religion" name="religion">
-                                        <option value="" selected="selected" disabled="disabled">-- select one --</option>
+                                        <option value="" selected="selected" disabled="disabled">-- select one --
+                                        </option>
                                         <option value="Christianity">Christianity</option>
                                         <option value="Islam">Islam</option>
                                         <option value="Nonreligious">Nonreligious</option>
@@ -267,7 +271,8 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="mobile">Mobile</label>
-                                    <input type="tel" name="mobile" class="form-control" id="P_mobile" pattern="^(^\+251|^251|^0)?9\d{8}">
+                                    <input type="tel" name="mobile" class="form-control" id="P_mobile"
+                                        pattern="^(^\+251|^251|^0)?9\d{8}">
                                 </div>
                             </div>
                             <div class="row">
@@ -321,11 +326,13 @@
                         <div class="col">
                             <div class="form-group col">
                                 <label for="P_testimony_file">Testimony File/Files</label>
-                                <input type="file" name="testimony_file" multiple class="form-control" id="P_testimony_file">
+                                <input type="file" name="testimony_file" multiple class="form-control"
+                                    id="P_testimony_file">
                             </div>
                             <div class="form-group col">
                                 <label for="P_testimony">Plaintiff Testimony</label>
-                                <textarea class="form-control" name="testimony" required rows="5" id="P_testimony"></textarea>
+                                <textarea class="form-control" name="testimony" required rows="5"
+                                    id="P_testimony"></textarea>
                             </div>
                         </div>
                     </div>
@@ -335,7 +342,38 @@
             </div>
         </div>
     </div>
+    <button class="mx-auto btn btn-primary mt-3" style="width: 150px;" onclick="fillForm()">FillTest</button>
 </div>
 <script>
     document.getElementById('P_date_of_birth').max = new Date().toJSON().split('T')[0];
+    function fillForm() {
+        selectElement('P_fname', "testFname");
+        selectElement('P_mname', "testMname");
+        selectElement('P_lname', "testWname");
+        selectElement('P_sex', "M");
+        selectElement('P_age', "23");
+        selectElement('P_date_of_birth',"1993-07-05");
+        selectElement('P_place_of_birth', "Addis Abeba");
+        selectElement('P_nationality', "ethiopian");
+        selectElement('P_ethnicity', "TestEthnicity");
+        selectElement('religion', "Other");
+        selectElement('P_income',"30000");
+        selectElement('P_mobile',"0986574343");
+        selectElement('P_house_no',"212");
+        selectElement('P_kebele',"1");
+        selectElement('P_subcity',"Yeka");
+        selectElement('P_former_kebele',"3");
+        selectElement('P_former_wereda',"3");
+        selectElement('P_salary',"54212");
+        selectElement('P_role',"Delala");
+        selectElement('P_work', "Delela");
+        selectElement('P_address',"Hayat");
+        selectElement('P_testimony',"Test Testimony");
+        
+        console.log("error");
+    }
+    function selectElement(id, valueToSelect) {
+        let element = document.getElementById(id);
+        element.value = valueToSelect;
+    }
 </script>

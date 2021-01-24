@@ -27,9 +27,8 @@
                                 <div class="col-md-6">
                                     <label for="sex">Sex</label>
                                     <select name="sex" id="W_sex" class="form-control" required>
-                                        <option></option>
-                                        <option>Male</option>
-                                        <option>Female</option>
+                                        <option value="M">Male</option>
+                                        <option value="F">Female</option>
                                     </select>
                                 </div>
                                 <div class="col-md-6">
@@ -50,7 +49,7 @@
                             <div class="row">
                                 <div class="col">
                                     <label for="nationality">Nationality</label>
-                                    <select class="form-control dropdown" id="nationality" name="nationality" required>
+                                    <select class="form-control dropdown" id="W_nationality" name="nationality" required>
                                         <option value="ethiopian">Ethiopian</option>
                                         <option value="afghan">Afghan</option>
                                         <option value="albanian">Albanian</option>
@@ -251,7 +250,7 @@
                                 </div>
                                 <div class="col">
                                     <label for="religion">Religion</label>
-                                    <select class="form-control dropdown" id="religion" name="religion">
+                                    <select class="form-control dropdown" id="W_religion" name="religion">
                                         <option value="" selected="selected" disabled="disabled">-- select one --</option>
                                         <option value="Christianity">Christianity</option>
                                         <option value="Islam">Islam</option>
@@ -334,7 +333,38 @@
             </div>
         </div>
     </div>
+    <button class="mx-auto btn btn-primary mt-3" style="width: 150px;" onclick="fillWForm()">FillTest</button>
 </div>
 <script>
     document.getElementById('W_date_of_birth').max = new Date().toJSON().split('T')[0];
+    function fillWForm() {
+        selectElement('W_fname', "testFname");
+        selectElement('W_mname', "testMname");
+        selectElement('W_lname', "testWname");
+        selectElement('W_sex', "M");
+        selectElement('W_age', "23");
+        selectElement('W_date_of_birth',"1993-07-05");
+        selectElement('W_place_of_birth', "Addis Abeba");
+        selectElement('W_nationality', "ethiopian");
+        selectElement('W_ethnicity', "TestEthnicity");
+        selectElement('W_religion', "Other");
+        selectElement('W_income',"30000");
+        selectElement('W_mobile',"0986574343");
+        selectElement('W_house_no',"212");
+        selectElement('W_kebele',"1");
+        selectElement('W_subcity',"Yeka");
+        selectElement('W_former_kebele',"3");
+        selectElement('W_former_wereda',"3");
+        selectElement('W_salary',"54212");
+        selectElement('W_role',"Delala");
+        selectElement('W_work', "Delela");
+        selectElement('W_address',"Hayat");
+        selectElement('W_testimony',"Test Testimony");
+        
+        console.log("error");
+    }
+    function selectElement(id, valueToSelect) {
+        let element = document.getElementById(id);
+        element.value = valueToSelect;
+    }
 </script>

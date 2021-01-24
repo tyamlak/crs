@@ -61,7 +61,7 @@
                             <div class="row">
                                 <div class="col">
                                     <label for="nationality">Nationality</label>
-                                    <select class="form-control dropdown" id="nationality" name="nationality" required>
+                                    <select class="form-control dropdown" id="C_nationality" name="nationality" required>
                                         <option value="ethiopian">Ethiopian</option>
                                         <option value="afghan">Afghan</option>
                                         <option value="albanian">Albanian</option>
@@ -262,7 +262,7 @@
                                 </div>
                                 <div class="col">
                                     <label for="religion">Religion</label>
-                                    <select class="form-control dropdown" id="religion" name="religion">
+                                    <select class="form-control dropdown" id="C_religion" name="religion">
                                         <option value="" selected="selected" disabled="disabled">-- select one --</option>
                                         <option value="Christianity">Christianity</option>
                                         <option value="Islam">Islam</option>
@@ -347,6 +347,7 @@
             </div>
         </div>
     </div>
+    <button class="mx-auto btn btn-primary mt-3" style="width: 150px;" onclick="fillCForm()">FillTest</button>
 </div>
 <script>
     document.getElementById('C_date_of_birth').max = new Date().toJSON().split('T')[0];
@@ -366,5 +367,35 @@
             reader.readAsDataURL(file);
         }
         document.getElementById('photo_text').innerHTML = "Photo";
+    }
+    function fillCForm() {
+        selectElement('C_fname', "testFname");
+        selectElement('C_mname', "testMname");
+        selectElement('C_lname', "testWname");
+        selectElement('C_sex', "M");
+        selectElement('C_age', "23");
+        selectElement('C_date_of_birth',"1993-07-05");
+        selectElement('C_place_of_birth', "Addis Abeba");
+        selectElement('C_nationality', "ethiopian");
+        selectElement('C_ethnicity', "TestEthnicity");
+        selectElement('C_religion', "Other");
+        selectElement('C_income',"30000");
+        selectElement('C_mobile',"0986574343");
+        selectElement('C_house_no',"212");
+        selectElement('C_kebele',"1");
+        selectElement('C_subcity',"Yeka");
+        selectElement('C_former_kebele',"3");
+        selectElement('C_former_wereda',"3");
+        selectElement('C_salary',"54212");
+        selectElement('C_role',"Delala");
+        selectElement('C_work', "Delela");
+        selectElement('C_address',"Hayat");
+        selectElement('C_testimony',"Test Testimony");
+        
+        console.log("error");
+    }
+    function selectElement(id, valueToSelect) {
+        let element = document.getElementById(id);
+        element.value = valueToSelect;
     }
 </script>
