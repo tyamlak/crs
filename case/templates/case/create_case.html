@@ -21,7 +21,7 @@ Add new case
                         <label for="fname">Assigned police</label>
                         <select class="form-container form-control" name="allowed_polices" id="police" required>
                             {% for p in police_list %}
-                                <option value="{{ p.pk }}">{{ p.profile.first_name }}</option>
+                                <option value="{{ p.pk }}">{{ p }}</option>
                             {% endfor %}
                         </select>
                     </div>
