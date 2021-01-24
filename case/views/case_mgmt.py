@@ -19,10 +19,14 @@ RESULTS_PER_PAGE = 10
 #@login_required
 def case_list(request):
 	cases = Case.objects.all()
-	crime_type_pk = request.POST.get('crime_type_pk')
-	crime_type = int(crime_type_pk)
-	if isinstance(crime_type,int):
-		cases = cases.filer(category=crime_type)
+	crime_type = None
+	crime_type_pk = request.POST.get('crime_type')
+	try:
+		crime_type = int(crime_type_pk)
+	except Exception as e:
+		print('Error could not parse int from request')
+	if crime_type and crime_type in [c.pk for c in CaseCategory.objects.all()]:
+		cases = cases.filter(category=crime_type)
 	paginator = Paginator(cases,RESULTS_PER_PAGE)
 	page = request.GET.get('page')
 	results = paginator.get_page(page)
