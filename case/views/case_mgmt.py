@@ -68,7 +68,9 @@ def create_case(request):
 		crime_type_pk = request.POST.get('crime_type')
 		crime_type = CaseCategory.objects.get(pk=int(crime_type_pk))
 		location_string = request.POST.get('locations')
-		for lv in location_string:
+		locations = location_string.split(';')
+		print(location_string)
+		for lv in locations:
 			if lv == '':
 				locations.remove('')
 	
@@ -86,6 +88,7 @@ def create_case(request):
 		for f in evidence_files:
 			CaseFile(case=case,file=f).save()
 		for ls in locations:
+			print(ls)
 			lat, lng = ls.split(',')
 			Location(lat=lat,lng=lng,case=case).save()	
 		case.created_by = created_by_id

@@ -20,7 +20,7 @@ Add new case
                     <div class="col">
                         <label for="police">Assigned police</label>
                         <select multiple data-style="bg-white rounded-pill px-4 py-3 shadow-sm" title="Assign Police"
-                            class="form-control selectpicker w-100" name="police" id="police" data-live-search="true">
+                            class="form-control selectpicker w-100" name="allowed_polices" id="police" data-live-search="true">
                             {% for p in police_list %}
                             <option value="{{ p.pk }}">{{ p }}</option>
                             {% endfor %}
