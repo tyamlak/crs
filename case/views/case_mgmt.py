@@ -12,11 +12,12 @@ from case.models import Location
 
 from django.contrib.auth import get_user
 from django.core.paginator import Paginator
+from django.contrib.auth.decorators import login_required
 
 
 RESULTS_PER_PAGE = 10
 
-#@login_required
+@login_required
 def case_list(request):
 	cases = Case.objects.all()
 	crime_type = None
@@ -36,7 +37,7 @@ def case_list(request):
 		}
 	)
 
-#@login_required
+@login_required
 def case_detail(request,pk):
 	case = Case.objects.get(pk=pk)
 	criminals = case.criminals.all()
@@ -53,13 +54,14 @@ def case_detail(request,pk):
 	}
 	)
 
+@login_required
 def close_case(request,pk):
 	case = Case.objects.get(pk=pk)
 	case.case_closed = True
 	case.save()
 	return redirect('case-detail',pk)
 
-#@login_required # requires(police/data_encoder)decorators
+@login_required # requires(police/data_encoder)decorators
 def create_case(request):
 	error = ''
 	if request.POST:
@@ -112,7 +114,7 @@ def create_case(request):
 		}
 	)
 
-
+@login_required
 def edit_case(request,pk):
 	if request.POST:
 		case = Case.objects.get(pk=pk)
@@ -159,7 +161,7 @@ def edit_case(request,pk):
 		'allowed_police_set':allowed_police_set,
 	})
 	
-
+@login_required
 def edit_criminal_info(request,pk):
 	criminal_ob = Person.objects.get(pk=pk)
 	if request.POST:
@@ -169,7 +171,7 @@ def edit_criminal_info(request,pk):
 	form = PersonForm(instance=criminal_ob)
 	return render(request,'case/edit_info.html',{'form':form})
 
-
+@login_required
 def add_criminal_to_case(request,pk):
 	if request.POST:
 		case = Case.objects.get(pk=pk) # raise 404 for EXCEPTIONS
@@ -229,7 +231,7 @@ def add_criminal_to_case(request,pk):
 		print('Adding criminal to case with pk ',pk)
 		return redirect('edit-case',pk)
 
-
+@login_required
 def add_plaintiff_to_case(request,pk):
 	if request.POST:
 		case = Case.objects.get(pk=pk) # raise 404 for EXCEPTIONS
@@ -285,7 +287,7 @@ def add_plaintiff_to_case(request,pk):
 		print('Adding plaintiff to case with pk ',pk)
 		return redirect('edit-case',pk)
 
-
+@login_required
 def add_witness_to_case(request,pk):
 	if request.POST:
 		case = Case.objects.get(pk=pk) # raise 404 for EXCEPTIONS
