@@ -36,6 +36,7 @@ class Case(models.Model):
     category = models.ForeignKey(CaseCategory,null=True,on_delete=models.SET_NULL)
     description = models.TextField(blank=False)
     created_by = models.PositiveIntegerField(blank=False,default=0)
+    case_closed = models.BooleanField(blank=False,default=False)
 
     @property
     def get_no_of_criminals(self):
@@ -73,6 +74,10 @@ class Case(models.Model):
             except Exception as e:
                 print('Profile is not DataEncoder')
         return user 
+    
+    @property
+    def is_closed(self):
+        return self.case_closed
 
 class CaseType(models.Model):
 
