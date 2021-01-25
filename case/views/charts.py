@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import View
 from case.models import Case
 from case.models import CaseCategory
@@ -8,14 +8,19 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from datetime import datetime
 
+from rest_framework import permissions
+from django.contrib.auth import get_user
+
 class HomeView(View):
     def get(self,request,*args,**kwargs):
+        if get_user(request).is_anonymous:
+            return redirect('login')
         return render(request,'case/charts.html')
 
 class CrimeTypeDist(APIView):
 
     authentication_classes = []
-    permission_classes = []
+    permission_classes = [ permissions.IsAuthenticated, ]
 
     def get(self,request,format=None):
         cts = CaseCategory.objects.all()
@@ -39,7 +44,7 @@ class CrimeTypeDist(APIView):
 class CrimeDist(APIView):
 
     authentication_classes = []
-    permission_classes = []
+    permission_classes = [ permissions.IsAuthenticated, ]
 
     def get(self,request,format=None):
         cts = CaseCategory.objects.all()
@@ -71,7 +76,7 @@ class CrimeDist(APIView):
 class SexDist(APIView):
 
     authentication_classes = []
-    permission_classes = []
+    permission_classes = [ permissions.IsAuthenticated, ]
 
     def get(self,request,format=None):
         no_of_male = Person.objects.filter(sex='M').count()
@@ -86,7 +91,7 @@ class SexDist(APIView):
 class MonthlyCrimeDist(APIView):
 
     authentication_classes = []
-    permission_classes = []
+    permission_classes = [ permissions.IsAuthenticated, ]
 
     def get(self,request,format=None):
         label = "Monthly Cases"
@@ -121,7 +126,7 @@ class MonthlyCrimeDist(APIView):
 class YearlyCrimeDist(APIView):
 
     authentication_classes = []
-    permission_classes = []
+    permission_classes = [ permissions.IsAuthenticated, ]
 
     def get(self,request,format=None):
         labels = []
