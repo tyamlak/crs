@@ -23,6 +23,7 @@ def get_map(request):
 		return JsonResponse(data)
 	return render(request,'case/maps_location.html')
 
+@login_required
 def map_dist(request):
 	if request.POST:
 		c_locations = Location.objects.all()
@@ -30,7 +31,7 @@ def map_dist(request):
 		case_id = []
 		for lc in c_locations:
 			locations.append((lc.lat,lc.lng))
-			case_id.append(randint(1,123))
+			case_id.append(lc.case.pk)
 		data = {
 			'locations':locations,
 			'case_id':case_id,
@@ -39,15 +40,17 @@ def map_dist(request):
 	return render(request,'case/map_dist.html')
 
 @log_activity
+@login_required
 def index(request,message=None):
 	from django.contrib.auth import get_user
 	if not get_user(request).is_anonymous:
 		return redirect('case-list')
 	return redirect('login')
 
+@login_required
 def criminal_detail(request,pk):
 	ob = Criminal.objects.get(pk=pk)
-	images = ob.images.all()
+	images = ob.images.filter(has_face=True)
 	criminal_case_set = ob.case_set.all()
 	image_url = '' # url(static) of Null image
 	if len(images) > 0:
