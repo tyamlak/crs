@@ -8,6 +8,7 @@ from .views.charts import (
     HomeView, CrimeTypeDist, SexDist, YearlyCrimeDist, MonthlyCrimeDist,
     CrimeDist
 )
+from .views.report import report
 
 urlpatterns = [
     path('',index,name='case-index'),
@@ -32,5 +33,6 @@ urlpatterns = [
     path('maps',get_map,name='maps'),
     path('map-dist',map_dist,name='maps'),
     path('list',case_list,name='case-list'),
+    path('report',report,name='generate-report'),
     path('mock',mock,name='mock')
 ]
