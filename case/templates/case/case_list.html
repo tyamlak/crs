@@ -24,7 +24,11 @@ Case List
             Number of Plaintiffs <span class="badge badge-light">{{ case.get_no_of_plaintiffs }}</span>
         </button>
         <div class="clearfix">
-            <span class="float-left mt-3"><b><em>Case Closed/Open</em></b></span>
+            {% if case.is_closed == True %}
+            <span class="float-left mt-3"><b><em>Case Closed</em></b></span>
+            {% else %}
+            <span class="float-left mt-3"><b><em>Case Open</em></b></span>
+            {% endif %}
             <a href="{% url "case-detail" case.pk %}" class="float-right mt-3 btn bg-light"><b><em>View Case</em></b></a>
         </div>
     </div>
