@@ -1,53 +1,144 @@
 {% extends "base.html" %}
 {% load static %}
 {% block title %}
-	Statistics
+Statistics
 {% endblock %}
-{% block head %} 
-	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js" ></script>
-	<script src="{% static "js/chart_utils.js" %}"></script>
+{% block head %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+<script src="{% static " js/chart_utils.js" %}"></script>
 {% endblock %}
 {% block content %}
-	<h1> Crime Statistics...</h1>
-	<div>
-		<button class="close" onclick="get_data('sex_dist')" id="monthly_stats">Gender Stats/</button><br>
-		<button class="close" onclick="get_data('crimes')" id="monthly_stats">Severe Stats/</button><br>
-		<button class="close" onclick="get_data('monthly')" id="monthly_stats">Monthly Stats/</button><br>
-		<button class="close" onclick="get_data('yearly')" id="monthly_stats">Yearly Stats/</button><br>
-		<button class="close" onclick="get_data('crime-dist')" id="crime_dist_stats">Crime Stats/</button><br>
+<h1> Crime Statistics...</h1>
+<div id="myGroup">
+	<button class="close" data-toggle="collapse" data-target="#gender_stats_" onclick="get_data('sex_dist')"
+		id="gender_stats">Gender Stats/</button><br>
+	<button class="close" data-toggle="collapse" data-target="#severe_stats_" onclick="get_data('crimes')"
+		id="severe_stats">Severe Stats/</button><br>
+	<button class="close" data-toggle="collapse" data-target="#monthly_stats_" onclick="get_data('monthly')"
+		id="monthly_stats">Monthly Stats/</button><br>
+	<button class="close" data-toggle="collapse" data-target="#yearly_stats_" onclick="get_data('yearly')"
+		id="yearly_stats">Yearly Stats/</button><br>
+	<button class="close" data-toggle="collapse" data-target="#crime_dist_stats_" onclick="get_data('crime-dist', '0')"
+		id="crime_dist_stats">Crime Stats/</button><br>
+	<!-- accordion -->
+	<div class="accordion-group m-3">
+		<div id="gender_stats_" data-parent="#myGroup" class="collapse">
+		</div>
+		<div id="severe_stats_" data-parent="#myGroup" class="collapse">
+		</div>
+		<div id="monthly_stats_" data-parent="#myGroup" class="collapse">
+			<div class="form-check-inline">
+				<div class="form-check-inline">
+					<label class="form-check-label">
+						<select id="monthly_stats_select" class="form-control">
+							<option value="2000">2000</option>
+							<option value="2001">2001</option>
+							<option value="2002">2002</option>
+							<option value="2003">2003</option>
+							<option value="2004">2004</option>
+							<option value="2005">2005</option>
+							<option value="2006">2006</option>
+							<option value="2007">2007</option>
+							<option value="2008">2008</option>
+							<option value="2009">2009</option>
+							<option value="2010">2010</option>
+							<option value="2011">2011</option>
+							<option value="2012">2012</option>
+							<option value="2013">2013</option>
+							<option value="2014">2014</option>
+							<option value="2015">2015</option>
+							<option value="2016">2016</option>
+							<option value="2017">2017</option>
+							<option value="2018">2018</option>
+							<option value="2019">2019</option>
+							<option selected value="2020">2020</option>
+							<option value="2021">2021</option>
+						</select>
+					</label>
+				</div>
+			</div>
+		</div>
+		<div id="yearly_stats_" data-parent="#myGroup" class="collapse">
+			Lorem ipsum dolor text....
+		</div>
+		<div id="crime_dist_stats_" data-parent="#myGroup" class="collapse">
+			<div class="form-check-inline">
+				<div class="form-check-inline">
+					<label class="form-check-label">
+						<select id="crime_dist_stats_select" class="form-control">
+							<option value="2000">2000</option>
+							<option value="2001">2001</option>
+							<option value="2002">2002</option>
+							<option value="2003">2003</option>
+							<option value="2004">2004</option>
+							<option value="2005">2005</option>
+							<option value="2006">2006</option>
+							<option value="2007">2007</option>
+							<option value="2008">2008</option>
+							<option value="2009">2009</option>
+							<option value="2010">2010</option>
+							<option value="2011">2011</option>
+							<option value="2012">2012</option>
+							<option value="2013">2013</option>
+							<option value="2014">2014</option>
+							<option value="2015">2015</option>
+							<option value="2016">2016</option>
+							<option value="2017">2017</option>
+							<option value="2018">2018</option>
+							<option value="2019">2019</option>
+							<option selected value="2020">2020</option>
+							<option value="2021">2021</option>
+						</select>
+					</label>
+				</div>
+			</div>
+		</div>
 	</div>
-	<div class="chart-container" style="position: relative; height:40vh; width:50vw">
-		<canvas id="myChart" width="" height=""></canvas>
-	</div>
+</div>
+<div class="chart-container mb-5" style="position: relative; height:40vh; width:50vw">
+	<canvas id="myChart" width="" height=""></canvas>
+</div>
 {% endblock %}
 {% block scripts %}
-	<script>
-		var chart_area
-		$(document).ready(function(){
-    		$.getScript("/static/js/chart_utils.js", function(data, textStatus, jqxhr){
-         		console.log('[Debug] Script file loaded.')
-			});
-			get_data()
+<script>
+	var chart_area;
+	$(document).ready(function () {
+		$.getScript("/static/js/chart_utils.js", function (data, textStatus, jqxhr) {
+			console.log('[Debug] Script file loaded.');
 		});
-		function get_data(api_url='crime-dist'){
-			var endpoint = '/case/api/' + api_url
-			var crime_stat = []
-			$.ajax({
-				method: "GET",
-				url: endpoint,
-				success: function(data){
-					console.log(data)
-					if (chart_area != undefined){
-						chart_area.destroy()
-					}
-					chart_area = draw_chart(data.stat,data.labels,data.label,data.chart_type)
-				},
-				error: function(error_data){
-					console.log("error")
-					console.log(error_data)
+		get_data('crime-dist', "0");
+	});
+	function get_data(api_url = 'crime-dist', year) {
+		var endpoint = '/case/api/' + api_url + "?year=" + year;
+		var crime_stat = [];
+		$.ajax({
+			method: "GET",
+			url: endpoint,
+			success: function (data) {
+				console.log(data);
+				if (chart_area != undefined) {
+					chart_area.destroy();
 				}
-			})
-		}
-	</script>
-		
+				chart_area = draw_chart(data.stat, data.labels, data.label, data.chart_type);
+			},
+			error: function (error_data) {
+				console.log("error");
+				console.log(error_data);
+			}
+		});
+	}
+	// accordion hide
+	var $myGroup = $('#myGroup');
+	$myGroup.on('show', '.collapse', function () {
+		$myGroup.find('.collapse.in').collapse('hide');
+	});
+	// update date
+	$('#monthly_stats_select').on('change', function () {
+		get_data('monthly', this.value);
+	});
+	$('#crime_dist_stats_select').on('change', function () {
+		get_data('monthly', this.value);
+	});
+</script>
+
 {% endblock %}
