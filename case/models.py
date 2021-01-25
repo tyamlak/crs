@@ -2,6 +2,7 @@ from django.db import models
 from UserProfile.models import Police, Criminal, Plaintiff, Witness , DataEncoder
 from datetime import datetime
 from django.contrib.auth.models import User
+from hashlib import md5
 
 
 class CaseCategory(models.Model):
@@ -113,3 +114,11 @@ class Location(models.Model):
 
     def __str__(self):
         return f'(lat: {self.lat}, lng: {self.lng})'
+
+
+class Report(models.Model):
+
+    def upload_location(self,file_name):
+        return f'report/{file_name}'
+
+    file = models.FileField(upload_to=upload_location,blank=False)
