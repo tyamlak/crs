@@ -8,6 +8,8 @@ from django.core.paginator import Paginator
 from hashlib import sha256
 import time
 from uuid import uuid4
+from django.contrib.auth.decorators import login_required
+from case.models import Case
 
 search_results = {}
 RESULTS_PER_PAGE = 5
@@ -61,6 +63,24 @@ def search_image(request):
 		return redirect('case-index')
 	return render(request,'case/search_image.html')
 
-
+@login_required
 def search(request):
+	if request.POST:
+		search_term = request.POST.get('search')
+		criminals = Criminal.objects.all()
+		criminal_set = []
+		case_set = []
+		for c in criminals:
+			if search_term in c.full_name:
+				criminal_set.append(c)
+			elif c.full_name in criminals:
+				criminal_set.append(c)
+		cases = Case.objects.all()
+		for c in cases:
+			if search_term in c.description:
+				case_set.append(c)
+		return render(request,'case/search.html',{
+			'case_set':case_set,
+			'criminal_set':criminal_set,
+		})
 	return render(request,'case/search.html')
