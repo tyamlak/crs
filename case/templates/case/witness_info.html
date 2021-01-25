@@ -1,0 +1,15 @@
+{% load static %}
+<div class="tab-pane" id="witness_info">
+    <div class="card">
+        <div class="card-body">
+            <div class="list-group">
+                <h5>Witness List</h5>
+                {% for witness in witness_set %}
+                <a href="#" class="list-group-item list-group-item-action bg-light w-50">{{ witness.full_name }}</a>
+                {% empty %}
+                <div>No added Witness</div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>

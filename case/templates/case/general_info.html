@@ -1,0 +1,73 @@
+{% load static %}
+<style>
+    a {
+        color: inherit;
+    }
+</style>
+<div class="tab-pane active accordion" id="general_info">
+    <div class="card">
+        <div class="card-header">
+            <a class="card-link" data-toggle="collapse" href="#collapseDescription">
+                <h5>Case description</h5>
+            </a>
+        </div>
+        <div id="collapseDescription" class="collapse show" data-parent="#accordion">
+            <div class="card-body">
+                {{case.description}}
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <a class="card-link" data-toggle="collapse" href="#collapseLocation">
+                <h5>Location</h5>
+            </a>
+        </div>
+        <div id="collapseLocation" class="collapse" data-parent="#accordion">
+            <div class="card-body">
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <a class="card-link" data-toggle="collapse" href="#collapseFiles">
+                <h5>Case Files</h5>
+            </a>
+            <div id="collapseFiles" class="collapse" data-parent="#accordion">
+                <div class="card-body">
+                    {% for case_file in case_files %}
+                    <a href="{{case_file.file.url}}">{{case_file.file.name}}</a>
+                    {% empty %}
+                    <div>No added files</div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <a class="card-link" data-toggle="collapse" href="#collapsePolice">
+                <h5>Police List</h5>
+            </a>
+        </div>
+        <div id="collapsePolice" class="collapse" data-parent="#accordion">
+            <div class="card-body">
+                {% for police in police_set %}
+                <a href="#" class="list-group-item list-group-item-action bg-light w-50">{{ police.full_name }}</a>
+                {% empty %}
+                <div>No assigned Police</div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="card w-25 mx-auto" style="width: 150px;">
+        <div class="card-header clear-fix">
+            {% if case.is_closed == True %}
+            <span class="ml-5"><b>Case Closed</b></span>
+            {% else %}
+            <span class="float-left"><b>Case Open</b></span>
+            <button class="btn btn-primary mt-2 float-right">Close Case</button>
+            {% endif %}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+{% load static %}
+<div class="tab-pane" id="criminal_info">
+    <div class="card">
+        <div class="card-body">
+            <div class="list-group">
+                <h5>Criminal List</h5>
+                {% for criminal in criminals %}
+                <a href="{% url "criminal" criminal.pk %}" class="list-group-item list-group-item-action bg-light w-50">{{ criminal.full_name }}</a>
+                {% empty %}
+                <div>No added Criminal</div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>

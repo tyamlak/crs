@@ -1,0 +1,15 @@
+{% load static %}
+<div class="tab-pane" id="plaintiff_info">
+    <div class="card">
+        <div class="card-body">
+            <div class="list-group">
+                <h5>Plaintiff List</h5>
+                {% for plaintiff in plaintiff_set %}
+                <a href="#" class="list-group-item list-group-item-action bg-light w-50">{{ plaintiff.full_name }}</a>
+                {% empty %}
+                <div>No added Plaintiff</div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
