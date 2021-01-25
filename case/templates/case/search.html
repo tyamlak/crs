@@ -9,7 +9,8 @@ Search Case
     integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
 <div class="jumbotron">
-    <form action="/case/imgsearch" method="POST" enctype="multipart/form-data" class="mx-auto" style="width: 70%;">
+    <form action="/case/search" method="POST" enctype="multipart/form-data" id="searchForm" class="mx-auto"
+        style="width: 70%;">
         {% csrf_token %}
         <div class="form-group">
             <label for="search">Search Case </label>
@@ -39,26 +40,36 @@ Search Case
 
         <input type="submit" class="btn btn-primary mt-3" value="Search">
 </div>
-<!-- <div class="form-group">
-            Filter:
-            <div class="form-check-inline">
-                <label class="form-check-label">
-                    <input type="radio" checked class="form-check-input" name="filter" value="">None
-                </label>
-            </div>
-            <div class="form-check-inline">
-                <label class="form-check-label">
-                    <input type="radio" class="form-check-input" name="filter" value="">Search for name
-                </label>
-            </div>
-        </div> -->
 </form>
 </div>
-
+<div class="card jumbotron">
+    <h6>Result</h6>
+    <div class="row">
+        <div class="col">
+            {% for case in case_set %}
+            <a href="{% url "case-detail" case.pk%}">
+                <p>{{ case.description }}</p>
+            </a>
+            {% empty %}
+            <p>No matching case description</p>
+            {% endfor %}
+        </div>
+        <div class="col">
+            {% for criminal in criminal_set %}
+            <a href="{% url "criminal" criminal.pk%}">
+                <p>{{ criminal.full_name }}</p>
+            </a>
+            {% empty %}
+            <p>No matching criminal</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
 <script>
     function showUpload() {
         let tab = document.getElementsByClassName('uploadTab');
         let searchInput = document.getElementsByClassName('search');
+        document.getElementById('searchForm').action = "/case/imgsearch";
         if (tab[0].style.display === "none") {
             tab[0].style.display = "block";
             tab[1].style.display = "block";
@@ -77,6 +88,7 @@ Search Case
     function closeBtn() {
         let tab = document.getElementsByClassName('uploadTab');
         let searchInput = document.getElementsByClassName('search');
+        document.getElementById('searchForm').action = "/case/search";
         tab[0].style.display = "none";
         tab[1].style.display = "none";
         searchInput[0].style.display = "block";
