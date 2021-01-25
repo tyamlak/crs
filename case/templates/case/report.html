@@ -30,4 +30,15 @@ Report
     </form>
 </div>
 
+<div class="card jumbotron">
+    <h5>Generated Reports</h5>
+    <ul class="list-group">
+        {% for report in report_set %}
+        <li class="list-group-item"><a href="{{ report.file.url }}">{{ report.file.name }}</a></li>
+        {% empty %}
+        <p>No report generated</p>
+        {% endfor %}
+    </ul>
+</div>
+
 {% endblock %}
