@@ -47,6 +47,11 @@ class CrimeDist(APIView):
         stat = []
         chart_type = 'bar'
         year = request.GET.get('year') or None
+        if year:
+            try:
+                year = int(year)
+            except Exception as e:
+                print("Error parsing int")
         label = 'Number of crimes '
         for ct in cts:
             labels.append(ct.crime)
