@@ -25,6 +25,11 @@
         </div>
         <div id="collapseLocation" class="collapse" data-parent="#accordion">
             <div class="card-body">
+                {% for location in case.locations.all %}
+                <a target="_blank" href="https://maps.google.com/maps?q={{ location.lat }},{{ location.lng }}">{{ location.lat }}</a>
+                {% empty %}
+                <p>No location added</p>
+                {% endfor %}
             </div>
         </div>
     </div>
