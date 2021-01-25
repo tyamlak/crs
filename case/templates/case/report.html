@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+Report
+{% endblock %}
+
+{% block content %}
+
+<div class="jumbotron">
+    <h3>Generate Report</h3>
+    <form action="">
+        Select type of Report
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="optradio" checked value="0">Monthly
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="optradio" value="1">Quarterly
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="optradio" value="2">Yearly
+            </label>
+        </div>
+        <button class="mx-auto btn btn-primary mt-3" id="submit" style="width: 200px;">Submit</button>
+    </form>
+</div>
+
+{% endblock %}
