@@ -160,3 +160,9 @@
         </div>
     </div>
 </div>
+<div class="list-group list-group-flush">
+    <h5 class="mt-3">List of Case/s involved in</h5>
+    {% for case in criminal_case_set %}
+    <a class="list-group-item" href="{% url "case-detail" case.pk %}">{{ case.category.crime }}</a>
+    {% endfor %}
+</div>

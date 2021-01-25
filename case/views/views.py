@@ -54,7 +54,7 @@ def criminal_detail(request,pk):
 		image_url = images[0].image.url 
 	return render(
 		request,'case/criminal_detail.html',{
-			'person':ob.profile,'image_url':image_url
+			'person':ob.profile,'image_url':image_url,
 			'criminal_case_set':criminal_case_set,
 		}
 	)
