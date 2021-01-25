@@ -56,6 +56,7 @@ def case_detail(request,pk):
 def close_case(request,pk):
 	case = Case.objects.get(pk=pk)
 	case.case_closed = True
+	case.save()
 	return redirect('case-detail',pk)
 
 #@login_required # requires(police/data_encoder)decorators

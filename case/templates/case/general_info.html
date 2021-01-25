@@ -63,10 +63,13 @@
     <div class="card w-25 mx-auto" style="width: 150px;">
         <div class="card-header clear-fix">
             {% if case.is_closed == True %}
-            <span class="ml-5"><b>Case Closed</b></span>
+            <span class="ml-5 pl-5"><b>Case Closed</b></span>
             {% else %}
-            <span class="float-left"><b>Case Open</b></span>
-            <button class="btn btn-primary mt-2 float-right">Close Case</button>
+            <form action="/case/{{case.pk}}/close" method="GET" enctype="multipart/form-data">
+                {% csrf_token %}
+                <span class="float-left"><b>Case Open</b></span>
+                <button class="btn btn-primary mt-2 float-right">Close Case</button>
+            </form>
             {% endif %}
         </div>
     </div>
