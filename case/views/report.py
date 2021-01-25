@@ -2,6 +2,7 @@ from django.shortcuts import render
 from case.models import Case, CaseCategory
 from datetime import datetime
 import calendar 
+from django.contrib.auth.decorators import login_required
 
 
 def create_pdf(table_data=None,ex_table=None, filename='CrimeReport.pdf', title=''):
@@ -158,10 +159,13 @@ def yearly_crime_report():
         table_data.append(table_row)
     return table_data, f'Yearly Number of cases for {report_year} '
 
-
+@login_required
 def report(request):
+    from case.models import Report
+    from django.core.files.base import File
     error = ''
     report_type = 1
+    file_name = ''
     if request.POST:
         table_data = None
         try:
@@ -169,23 +173,26 @@ def report(request):
         except Excecption as e:
             print('Error parsing int from request')
         if report_type == 0:
+            file_name = "Monthly Crime-Report.pdf"
             table_data, description = monthly_report_data()
-            create_pdf(table_data,filename="Monthly Crime-Report.pdf",title=description)
+            create_pdf(table_data,filename=file_name,title=description)
         elif report_type == 1:
+            file_name = "Quarterly Crime-Report.pdf"
             table_data, description = quarterly_report_data()
-            create_pdf(table_data,filename="Quarterly Crime-Report.pdf",title=description)
+            create_pdf(table_data,filename=file_name,title=description)
         elif report_type == 2:
+            file_name = "YearlyReport.pdf"
             table_data = yearly_report_data()
             ex_table, description = yearly_crime_report()
-            create_pdf(table_data,ex_table=ex_table,filename="YearlyReport.pdf",title=description)
-        else:
-            table_data = quarterly_report_data()
+            create_pdf(table_data,ex_table=ex_table,filename=file_name,title=description)
+        f = open(file_name,'rb')
+        report_file = File(f)
+        Report(file=report_file).save()
         return render(request,'case/report.html',{
-            'error':"Report generated successfully."
         })
-        
+    report_set = Report.objects.all()
     return render(
         request, 'case/report.html', {
-            'error': error,
+            'error': error,'report_set':report_set,
         }
     )
