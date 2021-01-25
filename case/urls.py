@@ -2,7 +2,7 @@ from django.urls import path
 from .views import (index, create_case, add_image, search_image, 
     criminal_detail, get_map, map_dist, edit_criminal_info, edit_case, 
     add_criminal_to_case, add_plaintiff_to_case, add_witness_to_case,
-    search,case_list,mock, case_detail
+    search,case_list,mock, case_detail, close_case
     )
 from .views.charts import (
     HomeView, CrimeTypeDist, SexDist, YearlyCrimeDist, MonthlyCrimeDist,
@@ -30,6 +30,7 @@ urlpatterns = [
     path('<int:pk>/add-criminal',add_criminal_to_case,name='criminal_to_case'),
     path('<int:pk>/add-plaintiff',add_plaintiff_to_case,name='plaintiff_to_case'),
     path('<int:pk>/add-witness',add_witness_to_case,name='witness_to_case'),
+    path('<int:pk>/close',close_case,name='close-case'),
     path('maps',get_map,name='maps'),
     path('map-dist',map_dist,name='maps'),
     path('list',case_list,name='case-list'),

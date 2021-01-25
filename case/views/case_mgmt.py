@@ -53,6 +53,11 @@ def case_detail(request,pk):
 	}
 	)
 
+def close_case(request,pk):
+	case = Case.objects.get(pk=pk)
+	case.case_closed = True
+	return redirect('case-detail',pk)
+
 #@login_required # requires(police/data_encoder)decorators
 def create_case(request):
 	error = ''
